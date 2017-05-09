@@ -110,3 +110,11 @@ You can translate the file ING.LUA, rename to LANG.LUA and place it in the next 
 ux0:data/AppManager/lang.lua
 
 *Remember to translate only the quoted words from ING.LUA.
+
+**Credits**
+Xerpi for vita2d
+
+Vitasdk
+
+Team Molecule for Henkaku
+
