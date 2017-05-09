@@ -130,7 +130,7 @@ disablesuprx =	"Disable plugin ?",
 
 ------------	ThemesLivearea		-------------------------------------------------------------------------
 customthemes =	"CustomThemes LiveArea",
-notthemes =		"Error in theme list!",
+notthemes =		"Empty/Error in theme list!",
 deltheme =		"Uninstall CustomTheme from app.db",
 delfilestheme =	"Delete files from CustomTheme ?",
 
