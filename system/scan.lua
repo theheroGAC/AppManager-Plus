@@ -1,41 +1,47 @@
-function getvpks(path)
-	local tmp = files.listfiles(path)
-
+function getvpks(_path, noscan)
+	local tmp = files.list(_path)	
 	if tmp and #tmp > 0 then
-		for i=1,#tmp do
-			local extension = tmp[i].ext:lower()
+		for i=1, #tmp do
+			if tmp[i].ext then
+				local extension = tmp[i].ext:lower()
 
-			if extension == "vpk" or extension == "mp4" or extension == "cso" or extension == "iso" then
-				if files.type(tmp[i].path) == 5 then										--Its really zip/vpk
-					if extension != "vpk" then
-						local new_name =  tmp[i].name+".vpk"
-						local fullpath = files.nofile(tmp[i].path)
-						files.rename(tmp[i].path,new_name)
-						tmp[i].path = fullpath+new_name
-						tmp[i].name = new_name
-						tmp[i].ext = "vpk"
-					end
-					table.insert(list_vpks.data, tmp[i])
-				elseif files.type(tmp[i].path) == 2 or files.type(tmp[i].path) == 3 then	--Its really iso/cso
-					if extension == "iso" or extension == "cso" then table.insert(list_vpks.data, tmp[i])
-					else
-						if files.type(tmp[i].path) == 2 then _ext=".iso" __ext="iso"
-						elseif files.type(tmp[i].path) == 3 then _ext=".cso" __ext="cso" end
-
-						local new_name =  tmp[i].name+_ext
-						local fullpath = files.nofile(tmp[i].path)
-						files.rename(tmp[i].path,new_name)
-						tmp[i].path = fullpath+new_name
-						tmp[i].name = new_name
-						tmp[i].ext = __ext
+				if extension == "vpk" or extension == "mp4" or extension == "cso" or extension == "iso" then
+					if files.type(tmp[i].path) == 5 then										--Its really zip/vpk
+						if extension != "vpk" then
+							local new_name =  tmp[i].name+".vpk"
+							local fullpath = files.nofile(tmp[i].path)
+							files.rename(tmp[i].path,new_name)
+							tmp[i].path = fullpath+new_name
+							tmp[i].name = new_name
+							tmp[i].ext = "vpk"
+						end
 						table.insert(list_vpks.data, tmp[i])
+					elseif files.type(tmp[i].path) == 2 or files.type(tmp[i].path) == 3 then	--Its really iso/cso
+						if extension == "iso" or extension == "cso" then table.insert(list_vpks.data, tmp[i])
+						else
+							if files.type(tmp[i].path) == 2 then _ext=".iso" __ext="iso"
+							elseif files.type(tmp[i].path) == 3 then _ext=".cso" __ext="cso" end
+
+							local new_name =  tmp[i].name+_ext
+							local fullpath = files.nofile(tmp[i].path)
+							files.rename(tmp[i].path,new_name)
+							tmp[i].path = fullpath+new_name
+							tmp[i].name = new_name
+							tmp[i].ext = __ext
+							table.insert(list_vpks.data, tmp[i])
+						end
 					end
+				end--extension
+
+			else
+				if noscan != 0 then
+					if tmp[i].directory then getvpks(tmp[i].path) end
 				end
-			end
+
+			end--tmp[i].ext
 
 		end--for
 	end
-	tmp=nil
 end
 
 function scan()
@@ -44,13 +50,12 @@ function scan()
 
 	getvpks("ux0:video/")
 	getvpks("ux0:data/")
-	getvpks("ux0:data/vpk/")
-	getvpks("ux0:/vpk/")
-	getvpks("ux0:/vpks/")
+	getvpks("ux0:vpk/")
+	getvpks("ur0:video/")
 	getvpks("ur0:data/")
-	getvpks("ur0:data/vpk/")
-	getvpks("ur0:/vpk/")
-	getvpks("ur0:/vpks/")
+	getvpks("ur0:vpk/")
+	getvpks("ux0:",0)
+	getvpks("ur0:",0)
 
 	list_vpks.len = #list_vpks.data
 	table.sort(list_vpks.data,function(a,b) return string.lower(a.name)<string.lower(b.name) end)
@@ -74,7 +79,6 @@ function scan()
 					buttons.homepopup(0)
 						show_msg_vpk(list_vpks.data[srcn.sel])
 					buttons.homepopup(1)
-					--infosize = os.devinfo(Root[Dev]:sub(1,4))
 
 				elseif list_vpks.data[srcn.sel].ext:lower() == "iso" or list_vpks.data[srcn.sel].ext:lower() == "cso" then
 
@@ -112,9 +116,9 @@ function scan()
 
 			local y = 70
 			for i=srcn.ini,srcn.lim do
-				if i == srcn.sel then draw.fillrect(25,y-2,700,22,theme.style.SELCOLOR) end
+				if i == srcn.sel then draw.fillrect(10,y-2,930,23,theme.style.SELCOLOR) end
 
-				screen.print(40,y,'#'+string.format("%02d",i)+' ) '+list_vpks.data[i].path,1.0,color.white,theme.style.BKGCOLOR,__ALEFT)
+				screen.print(20,y,'#'+string.format("%02d",i)+' ) '+list_vpks.data[i].path,1.0,color.white,theme.style.BKGCOLOR,__ALEFT)
 
 				y+=26
 			end
