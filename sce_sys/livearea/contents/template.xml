@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<livearea style="psmobile" format-ver="01.00" content-rev="1">
+	<livearea-background>
+		<image>bg0.png</image>
+	</livearea-background>
+	 
+	<gate>
+		<startup-image>startup.png</startup-image>
+	</gate>
+
+	<frame id="frame1">
+		<liveitem>
+			<image align="left" width="99" height="99" origin="frame">frame_icon.png</image>
+			<text origin="image" align="outside-right">
+			</text>
+		</liveitem>
+	</frame>
+
+	<frame id="frame2">
+		<liveitem>
+			<text valign="bottom" align="left" text-align="left" text-valign="bottom" line-space="3" ellipsis="on">
+				<str color="#ffffff" size="34" bold="on" shadow="on">AppManager -PLUS-</str>
+			</text>
+		</liveitem>
+	</frame>
+		
+	<frame id="frame3">
+		<liveitem>
+			<text align="left" text-align="left" word-wrap="off" ellipsis="on">
+				<str size="26" color="#ffffff" shadow="on">v1.0</str>
+			</text>
+		</liveitem>
+	</frame>
+	
+	<frame id="frame4">
+		<liveitem>
+			<text valign="top" align="left" text-align="left" text-valign="top" line-space="2" ellipsis="on">
+				<str size="22" shadow="on">®2017 Team ONElua - ONElua.x10.mx</str>
+			</text>
+		</liveitem>
+	</frame>
+	
+</livearea>
