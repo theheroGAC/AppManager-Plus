@@ -112,6 +112,7 @@ ux0:data/AppManager/lang.lua
 *Remember to translate only the quoted words from ING.LUA.
 
 **Credits**
+
 Xerpi for vita2d
 
 Vitasdk
