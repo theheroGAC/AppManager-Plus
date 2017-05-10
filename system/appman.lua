@@ -72,6 +72,7 @@ function appman.refresh()
 		end
 		appman.list[i].img = img
 
+		appman.list[i].title = appman.list[i].id						--the param.sfo on some apps are unreadable
 		if info and info.TITLE then appman.list[i].title = info.TITLE end
 		if theme.data["back"] then theme.data["back"]:blit(0,0) end
 
