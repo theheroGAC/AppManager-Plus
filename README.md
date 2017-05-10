@@ -98,9 +98,10 @@ FTPCOLOR		    = 0xA0CCCCFF
 
 -------------------------------------------------------------------------------------------------------------
 
-The theme folder must be placed in the next path:
 
-ux0:data/AppManager/yournameTheme
+AppManager Plus Themes must be placed in the next path:
+
+ux0:data/AppManPlus/themes/yournameTheme
 
 **Languaje**
 
