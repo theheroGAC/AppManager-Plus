@@ -11,8 +11,28 @@ It comes with built in File Explorer, vpk installer, custom theme installer/remo
 As a bonus feature you can design your own theme for AppManagerPlus, with a set of various images and colors and even the font can be changed.
 
 v2.0
-Please update your lang.lua in ux0:/data/AppManPlus/lang.lua for v2.0
-Press START in the File Explorer to enter the USB mode
+
+Please update your lang.lua in ux0:/data/AppManPlus/lang.lua
+
+USB mode available by pressing START in the File Explorer.
+
+FTP mode has been moved to the Options Submenu (pressing triangle on the File Explorer).
+
+Vpk scanning option has been optimized, now, when you enter this option it will do a fast search on the next paths:
+
+"ux0:video/", "ux0:data/", "ux0:data/vpk/", "ux0:/vpk/", "ux0:/vpks/"
+
+"ur0:video/", "ur0:data/", "ur0:data/vpk/", "ur0:/vpk/", "ur0:/vpks/"
+
+If no vpks files are found, it will automatically do a full search on ux0: and ur0:
+
+NOTE: The .mp4 files found will be renamed to .vpk, only if the .mp4 files really are .vpk.
+
+I the case of iso/cso files, the game will be moved to ux0:pspemu/ISO or ur0:pspemu/ISO depending on the iso/cso file origin.
+
+The CustomThemes option now only shows Custom Themes, because the Oficial Themes can not be uninstalled with this app.
+
+The option Install Game for installation of games from folder has been improved (this way you dont need double the space on the memory card).
 
 **#Themes for AppManager**
 
