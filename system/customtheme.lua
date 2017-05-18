@@ -6,7 +6,7 @@ theme_mgr = {}
 
 function theme_mgr.launch()
 	local list = themes.list()
-	if list then
+	if list and #list>0 then
 		local i = #list
 		while i > 0 do
 			if list[i].id:sub(1,9) != "ux0:theme" then
@@ -23,6 +23,8 @@ function theme_mgr.launch()
 
 			i -= 1
 		end
+
+		if #list<=0 then os.message(strings.notthemes) return end
 
 		local sel = 1
 		while true do
@@ -42,7 +44,6 @@ function theme_mgr.launch()
 						files.delete(list[sel].id)
 					end
 					table.remove(list,sel)
-					-- Añadir logica de sel :P
 				end
 			end
 
@@ -68,10 +69,10 @@ function theme_mgr.launch()
 			screen.print(35,520,strings.pressremove,1.0,color.white,color.blue,__ALEFT)
 			screen.flip()
 
-			if buttons.triangle then
-				--download XD
-				break;
+			if buttons.start then											--USB
+				usbMassStorage()
 			end
+
 			if buttons[cancel] then break end
 		end
 	else os.message(strings.notthemes) end

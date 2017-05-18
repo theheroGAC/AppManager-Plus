@@ -29,13 +29,19 @@ export =		"Export",
 themes =		"Themes AppMan",
 pluginsman =	"Plugins Man",
 cthemesman =	"CustomThemes",
+ftp =			"FTP",
 
 items =			"Sel Items: ",
 
 ------------	Ftp 		-----------------------------------------------
-ftp =			"Enter this FTP addres to your device or PC",
+textftp =		"Enter this FTP addres to your device or PC",
 closeftp =		"Press START to close FTP conection",
 loseftp =		"FTP Conection Closed",
+
+------------	USB 		-----------------------------------------------
+connectusb =	"Connect a USB cable",
+usbconnection = "USB Connection Enabled",
+cancelusb =		"Disabled",
 
 imgerror =		"Error Image not supported",
 
@@ -63,7 +69,10 @@ empty =			"Empty/Error",
 toexplorer =	"Explorer",
 
 --SearchingVpks
-vpktittle =		"Vpks Install",
+vpktittle =		"Vpks Searchs",
+wait =			"Please wait...",
+nofinds =		"No files were found",
+reloadfull =	"Full Scan of ux0:/ur0:",
 moveiso2ux0 =	"Move Game to ux0:pspemu/ISO",
 moveiso2ur0 =	"Move Game to ur0:pspemu/ISO",
 
@@ -74,10 +83,11 @@ percent =		"Percent: ",
 percent_total = "Percent Total: ",
 total_size =	"Total Size: ",
 total_written = "Total Written: ",
+
 --onAppInstall
 searchunsafe =	"Search in vpk, Unsafe or Dangerous files!",
-unsafevpk =		"Extended permissions and personal info access required! \nUse caution with non trusted source packages! \nDo you want to install at your own risk?",
-dangerousvpk =	"Warning!!! High risk of bricking your device \nif this VPK is installed! \nUse caution with non trusted source packages! \nDo you want to install at your own risk?",
+unsafevpk =		"Extended permissions and personal info access required! \n\nUse caution with non trusted source packages! \n\nDo you want to install at your own risk?",
+dangerousvpk =	"Warning!!! High risk of bricking your device if this VPK is installed! \n\nUse caution with non trusted source packages! \n\nDo you want to install at your own risk?",
 vpkunpack =		"Unpack vpk...",
 install =		"Installing...",
 
@@ -91,7 +101,7 @@ size_unpk =		"Size Unpack: ",
 
 --Launch PBP or VPK
 launchpbp =		"Launch game/app ",
-confirm =		"X: Accept  |  O: Cancel",
+confirm =		"Accept",
 warningvpk =	"\nWARNING TOTAL ACCESS\nUNSAFE VPK",
 warningvpk2 =	"WARNING TOTAL ACCESS",
 safevpk =		"VPK SAFE",

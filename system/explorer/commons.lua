@@ -20,7 +20,11 @@ function show_msg_pbp(handle)
 		if sfo then
 			if sfo.CATEGORY == "EG" or sfo.CATEGORY == "ME" then
 				screen.print(960/2,y+15,strings.launchpbp,1,color.black,color.blue,__ACENTER)
-				screen.print(960/2,y+400,strings.confirm,1,color.black,color.blue,__ACENTER)
+				if accept_x == 1 then
+					screen.print(960/2,y+400,"X "..strings.confirm.." | ".."O "..strings.cancel,1,color.black,color.blue,__ACENTER)
+				else
+					screen.print(960/2,y+400,"O "..strings.confirm.." | ".."X "..strings.cancel,1,color.black,color.blue,__ACENTER)
+				end
 			end
 			screen.print(960/2,y+40,tostring(sfo.TITLE),1,color.black,color.blue,__ACENTER)
 			screen.print(960/2,y+60,sfo.DISC_ID or sfo.TITLE_ID,1,color.black,color.blue,__ACENTER)
@@ -35,8 +39,8 @@ function show_msg_pbp(handle)
 
 		screen.flip()
 
-		if buttons.cross or buttons.circle then
-			if buttons.cross then
+		if buttons[accept] or buttons[cancel] then
+			if buttons[accept] then
 				if sfo and (sfo.CATEGORY == "EG" or sfo.CATEGORY == "ME") then
 					if sfo.DISC_ID then game.launch(sfo.DISC_ID) end
 					if sfo.TITLE_ID then game.launch(sfo.TITLE_ID) end

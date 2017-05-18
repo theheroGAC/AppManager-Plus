@@ -11,23 +11,32 @@
 
 vel, posimg, posy, var = 1.8, __DISPLAYW, 0, 0
 function bliteffect(img)
-	-- movemos la ola.
 	posimg -= vel
 	posy += var
 
-	-- evitar salirnos! si llegamos a 0, volver a 960!
 	if ( posimg <= 0 ) then posimg = 960 end
 	if ( posy >= 30 ) then var = 0.07 end
 	if ( posy < 0 ) then var = -0.07 end
 
-	-- pintar la ola en la posición! (recordar usar math.floor o ceil!)
 	img:blit(math.ceil(posimg),posy)
-
-	-- pintar su gemela para que parezca infinito!
 	img:blit(math.ceil(posimg)-960,posy)
 end
 
-appman = { -- Module App manager...
+function splash(pics,delay,vel)
+   pics:center()
+   for i = 0, 255, vel do
+      pics:blit(__DISPLAYW/2,__DISPLAYH/2,i)
+      screen.flip()
+   end
+   os.delay(delay)
+   for i = 255, 0, -vel do
+      pics:blit(__DISPLAYW/2,__DISPLAYH/2,i)
+      screen.flip()
+   end
+end
+
+-- Module App manager...
+appman = {
 	list = {},
 	len = 0,
 }
@@ -72,13 +81,16 @@ function appman.refresh()
 		end
 		appman.list[i].img = img
 
-		appman.list[i].title = appman.list[i].id						--the param.sfo on some apps are unreadable
+		appman.list[i].title = appman.list[i].id								--the param.sfo on some apps are unreadable
+		appman.list[i].cat = ""
 		if info and info.TITLE then appman.list[i].title = info.TITLE end
+		if info and info.CATEGORY then appman.list[i].cat = info.CATEGORY end
+
 		if theme.data["back"] then theme.data["back"]:blit(0,0) end
 
 		-- Only for test xD
 		if not explorer.list then
-			screen.print(10,10,"Loading...".." "..appman.list[i].title)
+			screen.print(10,10,appman.list[i].title) 
 			screen.flip()
 		end
 
@@ -92,12 +104,25 @@ function appman.ctrls()
 	if (buttons.up or buttons.held.l or buttons.analogly < -60) and pos > 1 then pos -= 1 end
 	if (buttons.down or buttons.held.r or buttons.analogly > 60) and pos < appman.len then pos += 1 end
 
-	if buttons.cross then
-		if __ID != appman.list[pos].id then game.launch(appman.list[pos].id)
+	
+	--tmp0.CATEGORY: ISO/CSO UG, PSN EG, HBs MG, PS1 ME
+	if buttons[accept] then
+		if __ID != appman.list[pos].id then
+			if appman.list[pos].cat == "EG" or appman.list[pos].cat == "ME" then
+				gameboot = game.getpic1(string.format("%s/eboot.pbp",appman.list[pos].path))
+				if not gameboot then gameboot = game.getpic0(string.format("%s/eboot.pbp",appman.list[pos].path)) end
+			else
+				gameboot = game.bg0(appman.list[pos].path)
+			end
+			if gameboot then
+				screen.flip()
+				splash(gameboot,10,3)
+			end
+			game.launch(appman.list[pos].id)
 		else os.restart() end
 	end
 
-	if buttons.circle then
+	if buttons[cancel] then
 		local pathmanual = ""
 		if appman.list[pos].path:sub(1,10) == "ux0:pspemu" then		--manual PSP/PS1
 			pathmanual = string.format("%s/document.dat",appman.list[pos].path)
@@ -123,7 +148,6 @@ function appman.ctrls()
 			local result = game.move(appman.list[pos].id, appman.list[pos].flag + 2)
 			buttons.homepopup(1)
 			reboot=true
-			--infosize = os.devinfo(Root[Dev]:sub(1,4))
 			if result ==1 then appman.refresh()
 			elseif result ==-2 then os.message(strings.notmemory) end
 		end
@@ -178,7 +202,6 @@ function appman.launch()
 		if buttons.select then
 			explorer.refresh()
 			buttons.interval(8,8)
-			--font.setdefault()
 			while true do
 
 				buttons.read()
@@ -189,7 +212,7 @@ function appman.launch()
 
 				screen.flip()
 
-				if buttons.select then pos=1 buttons.interval(10,10) break end
+				if buttons.select and menu_ctx.open== false then pos=1 buttons.interval(10,10) break end
 				if (buttons.held.l and buttons.held.r and buttons.up) and reboot then os.restart() end
 			end
 
@@ -233,7 +256,7 @@ function appman.launch()
 			end
 
 			local y = 35
-			for i=pos,math.min(appman.len,pos+15) do
+			for i=pos,math.min(appman.len,pos+15) do 
 
 				if i == pos then draw.fillrect(25,y-1,700,18,theme.style.SELCOLOR)	end
 
@@ -251,9 +274,13 @@ function appman.launch()
 			end
 
 			if theme.data["buttons1"] then
-				theme.data["buttons1"]:blitsprite(10,468,2)
-				theme.data["buttons1"]:blitsprite(10,493,1)
-				theme.data["buttons1"]:blitsprite(10,518,3)
+				theme.data["buttons1"]:blitsprite(10,468,2)--[]
+				theme.data["buttons1"]:blitsprite(10,493,1)--triangle
+				if accept_x == 1 then
+					theme.data["buttons1"]:blitsprite(10,518,3)--circle
+				else
+					theme.data["buttons1"]:blitsprite(10,518,0)--X
+				end
 			end
 			screen.print(35,470,strings.pressremove,1.0,color.white,color.blue,__ALEFT)
 			screen.print(35,495,strings.pressswitch,1.0,color.white,color.blue,__ALEFT)

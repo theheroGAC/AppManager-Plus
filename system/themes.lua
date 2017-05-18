@@ -81,7 +81,8 @@ function theme.load()
 		sfo = theme.style.SFOCOLOR,
 	}
 
-	if files.exists(string.format("%s%s",path,"font.ttf")) then	semi = font.setdefault(string.format("%s%s",path,"font.ttf")) end
+	if files.exists(string.format("%s%s",path,"font.ttf")) then	font.setdefault(string.format("%s%s",path,"font.ttf")) 
+	elseif files.exists(string.format("%s%s",path,"font.pgf")) then	font.setdefault(string.format("%s%s",path,"font.pgf")) end
 
 end
 	
@@ -142,7 +143,7 @@ function theme.manager()
 		end
 
 		if theme.data["buttons2"] then
-			theme.data["buttons2"]:blitsprite(10,515,1)
+			theme.data["buttons2"]:blitsprite(10,515,1)--start
 		end
 		screen.print(45,520,strings.reload,1.0,color.white,theme.style.BKGCOLOR,__ALEFT)
 

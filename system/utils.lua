@@ -10,7 +10,13 @@
 ]]
 
 accept,cancel = "cross","circle"
-if buttons.assign()==0 then accept,cancel = "circle","cross" end
+textXO = "O: "
+accept_x = 1
+if buttons.assign()==0 then
+	accept,cancel = "circle","cross"
+	textXO = "X: "
+	accept_x = 0
+end
 
 function ini.load(path) -- Translate a ini file to table lua! :D
     if not files.exists(path) then return nil end
@@ -205,4 +211,44 @@ function reload_configtxt()
 	os.taicfgreload()
 	os.delay(100)
 	os.message(strings.configtxt)
+end
+
+function usbMassStorage()
+
+    local buff = screen.buffertoimage()
+	local titlew = screen.textwidth(strings.connectusb) + 30
+
+	while usb.cable() != 1 and usb.state() != 1 do
+		buttons.read()
+		buff:blit(0,0)
+
+		draw.fillrect(450-(titlew/2),272-20,titlew,70,theme.style.BARCOLOR)
+		draw.rect(450-(titlew/2),272-20,titlew,70,color.white)
+		screen.print(450,272-20+13, strings.connectusb,1,color.white,color.black,__ACENTER)
+		screen.print(450,272-20+40, textXO..strings.cancelusb,1,color.white,color.black,__ACENTER)
+
+		screen.flip()
+
+		if buttons[cancel] then
+			return false
+		end
+	end
+
+	usb.start()
+
+	titlew = screen.textwidth(strings.usbconnection) + 30
+	while not buttons[cancel] do
+		buttons.read()
+		buff:blit(0,0)
+
+		draw.fillrect(450-(titlew/2),272-20,titlew,70,theme.style.BARCOLOR)
+		draw.rect(450-(titlew/2),272-20,titlew,70,color.white)
+		screen.print(450,272-20+13, strings.usbconnection,1,color.white,color.black,__ACENTER)
+		screen.print(450,272-20+40, textXO..strings.cancelusb,1,color.white,color.black,__ACENTER)
+
+		screen.flip()
+	end
+
+	usb.stop()
+
 end

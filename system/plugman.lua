@@ -48,7 +48,7 @@ function plugman.ctrl()
 			plugman.scroll:set(plugman.list[plugman.gameid], 10)
 		end
 
-		if buttons.cross then -- Delete prx!
+		if buttons.square then -- Delete prx!
 			if os.message(strings.disablesuprx.."\n"..plugman.list[plugman.gameid][plugman.scroll.sel].name,1)==1 then
 				for i=1,#plugman.cfg do
 					--if plugman.cfg[i] == plugman.list[plugman.gameid][plugman.scroll.sel].path then
@@ -61,7 +61,7 @@ function plugman.ctrl()
 						break
 					--end
 				end
-				write_txt("ux0:tai/config2.txt", plugman.cfg)
+				write_txt("ux0:tai/config.txt", plugman.cfg)
 				--reload config.txt
 				--os.delay(100)
 				--os.taicfgreload()
@@ -73,7 +73,6 @@ function plugman.ctrl()
 end
 
 function plugman.draw()
-	--if themesman then themesman:blit(0,0) elseif wall then wall:blit(0,0) end
 
 	screen.print(480,15,strings.plugsmanager.." - "..plugman.gameid,1,color.white,color.blue,__ACENTER)
 	screen.print(950,15,strings.count+plugman.scroll.maxim,1,color.red,theme.style.BKGCOLOR,__ARIGHT)

@@ -1,5 +1,6 @@
 --CallBacks LUA
-function onAppInstall(step, size_argv, written, file, totalsize, totalwritten) 
+function onAppInstall(step, size_argv, written, file, totalsize, totalwritten)
+
     if step == 1 then -- Only msg of state
     	if theme.data["back"] then theme.data["back"]:blit(0,0) end
 
@@ -10,10 +11,10 @@ function onAppInstall(step, size_argv, written, file, totalsize, totalwritten)
 	elseif step == 2 then -- Alerta Vpk requiere confirmacion!
 		while true do
 			buttons.read()
-			if buttons.cross then
+			if buttons[accept] then
 				buttons.read() -- Flush
 				return 10 -- Ok code
-			elseif buttons.circle then
+			elseif buttons[cancel] then
 				buttons.read() -- Flush
 				return 0; -- Any other code xD
 			end
@@ -25,7 +26,12 @@ function onAppInstall(step, size_argv, written, file, totalsize, totalwritten)
 			elseif size_argv == 2 then
 				screen.print(10,10,strings.dangerousvpk)
 			end
-			screen.print(10,505,strings.confirm,1.0,color.white, color.blue)
+
+			if accept_x == 1 then
+				screen.print(10,505,"X "..strings.confirm.." | ".."O "..strings.cancel,1.0,color.white, color.blue)
+			else
+				screen.print(10,505,"O "..strings.confirm.." | ".."X "..strings.cancel,1.0,color.white, color.blue)
+			end
 			screen.flip()
 		end
 	elseif step == 3 then -- Unpack :P
@@ -69,7 +75,7 @@ function onExtractFiles(size,written,file,totalsize,totalwritten)
 	screen.flip()
 	
 	buttons.read()
-	if buttons.circle then
+	if buttons[cancel] then
 		return 0;
 	end
 	return 1;

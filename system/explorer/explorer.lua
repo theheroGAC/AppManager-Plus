@@ -105,7 +105,7 @@ function show_explorer_list()
 end
 
 function explorer.refresh()
-	infosize = os.devinfo(Root[Dev]:sub(1,4))
+	if Dev == 1 then infosize = os.devinfo(Root[3]) else infosize = os.devinfo(Root[4]) end
 	explorer.list = files.listsort(Root[Dev])
 	scroll.list:set(explorer.list,maxim_files)
 end
@@ -133,7 +133,7 @@ function ctrls_explorer_list()
 
 		if buttons[accept] then
 			handle_files(explorer.list[scroll.list.sel])
-			if not explorer.list[scroll.list.sel].size then 					-- Its Dir
+			if not explorer.list[scroll.list.sel].size then 		-- Its Dir
 				table.insert(backl, {maxim = scroll.list.maxim, ini = scroll.list.ini, sel = scroll.list.sel, lim = scroll.list.lim, })
 				Root[Dev]=explorer.list[scroll.list.sel].path
 				explorer.refresh()
@@ -144,38 +144,11 @@ function ctrls_explorer_list()
 	if (buttons.left or buttons.right) then
 		if menu_ctx.open then return end							-- Switch device
 		if Dev == 1 then Dev = 2 else Dev = 1 end
-		--infosize = os.devinfo(Root[Dev]:sub(1,4))
 		explorer.refresh()
 	end
 
-	if buttons.start then																		--FTP
-		if not wlan.isconnected() then wlan.connect() end
-		if wlan.isconnected() then ftp.init() end
-
-		while ftp.state() do
-			reboot=false
-			power.tick(1)
-			buttons.read()
-			if theme.data["ftp"] then theme.data["ftp"]:blit(0,0) end
-			screen.print(960/2,300,strings.ftp,1,color.white,color.blue,__ACENTER)
-			screen.print(327,333,"FTP://"+tostring(wlan.getip())..":1337",1,theme.style.FTPCOLOR,color.black)
-			screen.print(960/2,375,strings.closeftp,1,color.white,color.blue,__ACENTER)
-			screen.flip()
-
-			if buttons.start then
-				if theme.data["ftp"] then theme.data["ftp"]:blit(0,0) end
-				screen.print(960/2,300,strings.ftp,1,color.white,color.blue,__ACENTER)
-				screen.print(327,333,"FTP://"+tostring(wlan.getip())..":1337",1,theme.style.FTPCOLOR,color.black)
-				screen.print(960/2,375,strings.loseftp,1,color.white,color.blue,__ACENTER)
-				screen.flip()
-				ftp.term()
-				--infosize = os.devinfo(Root[Dev]:sub(1,4))
-				os.delay(250)
-				explorer.refresh()
-			end
-
-		end
-		reboot=true
+	if buttons.start then											--USB
+		usbMassStorage()
 	end
 
 	if buttons.square then
@@ -187,6 +160,7 @@ function ctrls_explorer_list()
 			table.remove(multi, explorer.list[scroll.list.sel].index)
 		end
 	end
+
 end
 
 function handle_files(cnt)
@@ -342,11 +316,15 @@ function show_msg_vpk(infovpk)
 			screen.print(960/2,y+340,strings.alertunsafe,1,color.black,color.blue,__ACENTER)	
 		end
 
-		screen.print(960/2,y+395,strings.confirm,1,color.black,color.blue,__ACENTER)
+		if accept_x == 1 then
+			screen.print(960/2,y+395,"X "..strings.confirm.." | ".."O "..strings.cancel,1,color.black,color.blue,__ACENTER)
+		else
+			screen.print(960/2,y+395,"O "..strings.confirm.." | ".."X "..strings.cancel,1,color.black,color.blue,__ACENTER)
+		end
 		screen.flip()
 
-		if buttons.cross or buttons.circle then
-			if buttons.cross then res = true end
+		if buttons[accept] or buttons[cancel] then
+			if buttons[accept] then res = true end
 			break
 		end
 
@@ -531,7 +509,6 @@ local paste_callback = function ()
 	menu_ctx.wakefunct()
 	menu_ctx.close = true
 	action = false
-	--infosize = os.devinfo(Root[Dev]:sub(1,4))
 	explorer.refresh()
 	explorer.action = 0
 	explorer.dst = ""
@@ -542,7 +519,7 @@ local delete_callback = function () -- TODO: add move to -1 pos of the deleted e
 	if #explorer.list > 0 then
 		if explorer.list[scroll.list.sel].multi then
 			if #multi>0 then
-				if os.message(strings.delete.."(s) "..#multi..strings.filesfolders.."(s) ?",1) == 1 then
+				if os.message(strings.delete.." "..#multi.."\n"..strings.filesfolders.."(s) ?",1) == 1 then
 					reboot=false
 					for i=1,#multi do files.delete(multi[i]) end
 					reboot=true
@@ -559,7 +536,6 @@ local delete_callback = function () -- TODO: add move to -1 pos of the deleted e
 		menu_ctx.wakefunct()
 		menu_ctx.close = true
 		action = false
-		--infosize = os.devinfo(Root[Dev]:sub(1,4))
 		explorer.refresh()
 		explorer.action = 0
 		multi={}
@@ -580,7 +556,6 @@ local makedir_callback = function () -- Added suport multi-new-folder
 		menu_ctx.wakefunct()
 		menu_ctx.close = true
 		action = false
-		--infosize = os.devinfo(Root[Dev]:sub(1,4))
 		explorer.refresh()
 		explorer.action = 0
 		multi={}
@@ -607,9 +582,16 @@ end
 
 local installgame_callback = function ()
 	if #explorer.list > 0 then
+		if explorer.list[scroll.list.sel].ext == "vpk" then
+			buttons.homepopup(0)
+				show_msg_vpk(explorer.list[scroll.list.sel])
+			buttons.homepopup(1)
+			return
+		end
+
 		if not files.exists(string.format("%s/eboot.bin",explorer.list[scroll.list.sel].path)) and
 			not files.exists(string.format("%s/sce_sys/param.sfo",explorer.list[scroll.list.sel].path)) then return end
-		
+
 		local bufftmp = screen.buffertoimage()
 		local x,y = (960-420)/2,(544-420)/2
 		local resp=0
@@ -617,6 +599,9 @@ local installgame_callback = function ()
 		local img =	 image.load(string.format("%s/sce_sys/icon0.png",explorer.list[scroll.list.sel].path))
 
 		local res = false
+		local Xa = "O: "
+		local Oa = "X: "
+		if accept_x == 1 then Xa,Oa = "X: ","O: " end
 		while true do
 			buttons.read()
 			bufftmp:blit(0,0)
@@ -636,11 +621,11 @@ local installgame_callback = function ()
 			end
 
 			screen.print(960/2,y+325,strings.installvpk +" ?",1,color.black,color.blue,__ACENTER)
-			screen.print(960/2,y+395,strings.confirm,1,color.black,color.blue,__ACENTER)
+			screen.print(960/2,y+395,Xa..strings.confirm.." | "..Oa..strings.cancel,1,color.black,color.blue,__ACENTER)
 			screen.flip()
 
-			if buttons.cross or buttons.circle then
-				if buttons.cross then res = true end
+			if buttons[accept] or buttons[cancel] then
+				if buttons[accept] then res = true end
 				break
 			end
 		end
@@ -667,7 +652,6 @@ local installgame_callback = function ()
 		menu_ctx.wakefunct()
 		menu_ctx.close = true
 		action = false
-		--infosize = os.devinfo(Root[Dev]:sub(1,4))
 		explorer.refresh()
 		explorer.action = 0
 		multi={}
@@ -695,7 +679,6 @@ local installtheme_callback = function ()
 		menu_ctx.wakefunct()
 		menu_ctx.close = true
 		action = false
-		--infosize = os.devinfo(Root[Dev]:sub(1,4))
 		explorer.refresh()
 		explorer.action = 0
 		multi={}
@@ -721,16 +704,19 @@ local sizedir_callback = function ()
 			end
 		end
 		sizedir=nil
-		menu_ctx.wakefunct()
+		return
+
+		--[[menu_ctx.wakefunct()
 		menu_ctx.close = true
 		action = false
 		explorer.action = 0
+		]]
 	end
 end
 
 local scanvpk_callback = function ()
 	menu_ctx.wakefunct()
-	scan()
+	scan(0)
 	menu_ctx.close = true
 	action = false
 	explorer.refresh()
@@ -743,9 +729,13 @@ local filesexport_callback = function ()
 		local ext = explorer.list[scroll.list.sel].ext or ""
 		if ext:lower() == "png" or ext:lower() == "jpg" or ext:lower() == "bmp" or ext:lower() == "gif" or ext:lower() == "mp3" then
 			reboot=false
+				local titlew = screen.textwidth(strings.wait) + 30
+				draw.fillrect(450-(titlew/2),272-20,titlew,70,theme.style.BARCOLOR)
+				draw.rect(450-(titlew/2),272-20,titlew,70,color.white)
+				screen.print(450,272-20+13,strings.wait,1,color.white,color.black,__ACENTER)
+				screen.flip()
 			local result = files.export(explorer.list[scroll.list.sel].path)
 			reboot=true
-			os.message(strings.export+" "+tostring(result))
 
 			if result == 1 then
 				if os.message(strings.openmusic,1)==1 then
@@ -753,16 +743,17 @@ local filesexport_callback = function ()
 					if ext:lower() == "mp3" then os.uri("music:browse?category=ALL")
 					else os.uri("photo:browse?category=ALL") end
 				end
+			else
+--clean
+				menu_ctx.wakefunct()
+				menu_ctx.close = true
+				action = false
+				if Dev == 1 then infosize = os.devinfo(Root[3]) else infosize = os.devinfo(Root[4]) end
+				--explorer.refresh()
+				explorer.action = 0
+				--multi={}
 			end
 		end
---clean
-		menu_ctx.wakefunct()
-		menu_ctx.close = true
-		action = false
-		infosize = os.devinfo(Root[Dev]:sub(1,4))
-		--explorer.refresh()
-		explorer.action = 0
-		--multi={}
 	end
 end
 
@@ -801,8 +792,9 @@ local pluginsman_callback = function ()
 end
 ]]
 
-local cancel_callback = function ()
+local reloadconfig_callback = function ()
 	menu_ctx.wakefunct()
+	reload_configtxt()
 --clean
 	menu_ctx.close = true
 	action = false
@@ -811,9 +803,49 @@ local cancel_callback = function ()
 	multi={}
 end
 
-local reloadconfig_callback = function ()
+function startftp()
+	if not wlan.isconnected() then wlan.connect() end
+	if wlan.isconnected() then ftp.init() end
+
+	while ftp.state() do
+		reboot=false
+		power.tick(1)
+		buttons.read()
+		if theme.data["ftp"] then theme.data["ftp"]:blit(0,0) end
+		screen.print(960/2,300,strings.textftp,1,color.white,color.blue,__ACENTER)
+		screen.print(327,333,"FTP://"+tostring(wlan.getip())..":1337",1,theme.style.FTPCOLOR,color.black)
+		screen.print(960/2,375,strings.closeftp,1,color.white,color.blue,__ACENTER)
+		screen.flip()
+
+		if buttons.start then
+			if theme.data["ftp"] then theme.data["ftp"]:blit(0,0) end
+			screen.print(960/2,300,strings.textftp,1,color.white,color.blue,__ACENTER)
+			screen.print(327,333,"FTP://"+tostring(wlan.getip())..":1337",1,theme.style.FTPCOLOR,color.black)
+			screen.print(960/2,375,strings.loseftp,1,color.white,color.blue,__ACENTER)
+			screen.flip()
+			ftp.term()
+			os.delay(250)
+			explorer.refresh()
+		end
+
+	end
+	reboot=true
+end
+
+local ftp_callback = function ()
 	menu_ctx.wakefunct()
-	reload_configtxt()
+--clean
+	startftp()
+
+	menu_ctx.close = true
+	action = false
+	explorer.refresh()
+	explorer.action = 0
+	multi={}
+end
+
+local cancel_callback = function ()
+	menu_ctx.wakefunct()
 --clean
 	menu_ctx.close = true
 	action = false
@@ -839,15 +871,16 @@ function menu_ctx.wakefunct(var)
 		{ text = strings.delete,		state = true, funct = delete_callback },
 		{ text = strings.makedir,		state = true, funct = makedir_callback },
 		{ text = strings.rename,		state = true, funct = rename_callback },
+		{ text = strings.size,			state = true, funct = sizedir_callback },
+		{ text = strings.export,		state = true, funct = filesexport_callback },
 		{ text = strings.insvpkfromdir,	state = true, funct = installgame_callback },
 		{ text = strings.instheme,		state = true, funct = installtheme_callback },
-		{ text = strings.size,			state = true, funct = sizedir_callback },
 		{ text = strings.scanvpks,		state = true, funct = scanvpk_callback },
-		{ text = strings.export,		state = true, funct = filesexport_callback },
 		{ text = strings.themes,		state = true, funct = themesAppManager_callback },
 		{ text = strings.cthemesman,	state = true, funct = themesLiveArea_callback },
 		{ text = strings.reloadconfig,	state = true, funct = reloadconfig_callback },
 		--{ text = strings.pluginsman,	state = true, funct = pluginsman_callback },
+		{ text = strings.ftp,			state = true, funct = ftp_callback },
 		{ text = strings.cancel,		state = true, funct = cancel_callback },
 	}
 	if var==strings.paste then
@@ -906,7 +939,7 @@ function menu_ctx.buttons()
 	if buttons[accept] and menu_ctx.options[menu_ctx.scroll.sel].funct then
 		menu_ctx.options[menu_ctx.scroll.sel].funct()
 	end
-	if buttons[cancel] then -- Run function of cancel option. 
+	if buttons[cancel] then -- Run function of cancel option.
 		--		menu_ctx.options[menu_ctx.scroll.maxim].funct() --menu_ctx.close = true 
 		menu_ctx.close = not menu_ctx.close
 	end

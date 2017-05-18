@@ -9,9 +9,7 @@
 	Collaborators: BaltaR4 & Wzjk.
 ]]
 
-
 files.mkdir("ux0:data/AppManPlus/themes/")								-- Create a folder work
-
 color.loadpalette()
 dofile("system/utils.lua") 												-- Extra funtions
 
@@ -22,23 +20,13 @@ end
 
 -- Load lang file
 if files.exists("ux0:/data/AppManPlus/lang.lua") then dofile("ux0:/data/AppManPlus/lang.lua")
-else
-	lang = os.language()
-	if lang == "SPANISH" then
-		if not files.exists("ux0:/data/AppManPlus/lang.lua") then
-			files.copy("system/lang/lang.lua", "ux0:/data/AppManPlus/")
-			dofile("ux0:/data/AppManPlus/lang.lua")
-		end
-	else
-		dofile("system/lang/default.lua")
-	end
-end
+else dofile("system/lang/default.lua") end
 
 -- Create a globals
 __ID = os.titleid()
 
 vpkdel = false
-Dev, Root = 1, {"ux0:","ur0:"}  
+Dev, Root = 1, {"ux0:","ur0:", "ux0:","ur0:"}  
 infosize = os.devinfo(Root[Dev])
 
 dofile("system/themes.lua")												-- Load Theme Application
