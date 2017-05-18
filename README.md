@@ -16,6 +16,9 @@ Please update your lang.lua in ux0:/data/AppManPlus/lang.lua
 
 USB mode available by pressing START in the File Explorer.
 
+""Use with caution, do not disconect the ps vita when doing USB data transfer, and  avoid letting the ps vita turn off cause of low battery""
+
+
 FTP mode has been moved to the Options Submenu (pressing triangle on the File Explorer).
 
 Vpk scanning option has been optimized, now, when you enter this option it will do a fast search on the next paths:
