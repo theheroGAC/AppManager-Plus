@@ -10,6 +10,9 @@ It comes with built in File Explorer, vpk installer, custom theme installer/remo
 
 As a bonus feature you can design your own theme for AppManagerPlus, with a set of various images and colors and even the font can be changed.
 
+v2.0
+Please update your lang.lua in ux0:/data/AppManPlus/lang.lua for v2.0
+Press START in the File Explorer to enter the USB mode
 
 **#Themes for AppManager**
 
