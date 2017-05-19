@@ -1,0 +1,152 @@
+--Texts
+strings = {
+
+-------------	Explorer	----------------------------------------------
+back =			"返回 ",
+copyfile =		"正在复制: ",
+delfile =		"正在删除: ",
+dir =			"<DIR>",
+creatfolder =	"创建文件夹",
+newfolder =		"新文件夹",
+pass =			"使用密碼 ？",
+ospass =		"密碼",
+
+--SubMenu
+copy =			"复制",
+delete =		"刪除",
+makedir =		"创建文件夹",
+rename =		"重命名",
+extract =		"解压",
+cancel =		"取消",
+insvpkfromdir = "安装游戏",
+instheme =		"安装自定义主题",
+extractto =		"解压到当前",
+paste =			"粘贴",
+move =			"移动",
+size =			"大小",
+scanvpks =		"扫描 VPK",
+export =		"导出",
+themes =		"软件管理器主题",
+pluginsman =	"软件管理器插件",
+cthemesman =	"自定义主题",
+ftp =			"FTP",
+
+items =			"已选项目数: ",
+
+------------	Ftp 		-----------------------------------------------
+textftp =			"在你的电脑软件上输入这个 FTP 地址",
+closeftp =		"按 START 键关闭 FTP 连接",
+loseftp =		"FTP 连接关闭",
+
+------------	USB 		-----------------------------------------------
+connectusb =	"使用 USB 连接",
+usbconnection = "开启 USB 连接",
+cancelusb =		"关闭",
+
+imgerror =		"不支持的镜像文件",
+
+-- ## Music Player ##
+playing =		"正在播放",
+paused =		"暂停",
+time =			"时间: ",
+tags =			"xx:xx:xx",
+sounderror =	"无效的错误音频",
+
+--AppManager
+apptittle =		"软件管理器 (软件 - 气泡)",
+switch =		"確定轉移 ",
+nomemory =		"存储空间不足...",
+appremove =		"確定刪除 ",
+delclon	=		"删除: ",
+updatedb =		"你的 PSVita 将会重启...\n数据库将会重建",
+manual =		"確定移除說明書嗎？",
+notmanual =		"已移除说明书！",
+notfindmanual =	"說明書不存在",
+removemanual =	"移除说明书",
+pressremove =	"卸载",
+pressswitch =	"转移 (ux0<->ur0)",
+empty =			"无效/错误",
+toexplorer =	"浏览器",
+
+--SearchingVpks
+vpktittle =		"Vpk 安装",
+wait =			"请等候...",
+nofinds =		"没有发现文件",
+reloadfull =	"完全扫描 ux0:/ur0:",
+moveiso2ux0 =	"移动游戏到 ux0:pspemu/ISO",
+moveiso2ur0 =	"移动游戏到 ur0:pspemu/ISO",
+
+-------------		Callbacks		---------------------------------------------------------------------
+unsafe =		"非安全: ",
+file =			"文件: ",
+percent =		"百分比: ",
+percent_total = "总百分比: ",
+total_size =	"总大小: ",
+total_written = "已写入: ",
+--onAppInstall
+searchunsafe =	"在 VPK 中搜索非安全或危险的文件！",
+unsafevpk =		"需要额外权限和访问个人信息！ \n安装非信任安装包时会显示本警告！ \n确定要安装并自负风险吗？",
+dangerousvpk =	"警告！！！ 如果安装这个 VPK \n可能会导致设备损坏！ \n安装非信任安装包时会显示本警告！ \n确定要安装并自负风险吗？",
+vpkunpack =		"正在解压 VPK...",
+install =		"正在安装...",
+
+--onExtractFiles
+extraction =	"正在解压...",
+
+--onScanningFiles
+scanning =		"正在扫描...",
+size_unpk =		"解压大小: ",
+-----------------------------------------------------------------------------------------------------------
+
+--Launch PBP or VPK
+launchpbp =		"加載遊戲或軟件 ",
+confirm =		"接受",
+warningvpk =	"\n执行非安全\nVPK 警告",
+warningvpk2 =	"完全执行警告",
+safevpk =		"VPK 安全",
+total_sizevpk = "VPK 总大小: ",
+installvpk =	"安装 VPK",
+installgame =	"安装 软件",
+alertunsafe =	"VPK 非安全！！！",
+alertdang =		"VPK 危险！！！",
+installvpkdir =	"从文件夹安装 VPK",
+launchbin =		"加载软件 ",
+
+------------	Switch Apps/vpks	------------------------------------------------------------------------
+required =		"\n需要空间: ",
+searchapp =		"\n确定转移软件到 ur0: ？",
+vpktour0 =		"确定转移 VPK 到 ur0: 你可以安装它？",
+vpktoux0 =		"确定转移 VPK 到 ux0: ？",
+stillnomemory =	"没有足够的空间进行转移",
+vpkinuro =		"这个 VPK 已经在 ur0: 中...\n请尝试清理出一些存储空间...",
+apptour0 =		"转移到 ur0:",
+ur0toapp =		"转移软件到 ux0: ？",
+tittle =		"标题: ",
+errorapp =		"错误...不能移动这个软件...",
+errorinstall =	"安装时发生错误",
+
+------------	ThemesAppmanager	-------------------------------------------------------------------------
+themesappman =	"AppManager PLUS 主题",
+themesdone =	"安装完成！",
+reload =		"加载原始主题",
+settinsthemes =	"前往设置主题？",
+
+------------	PluginsManager		-------------------------------------------------------------------------
+plugsmanager =	"插件管理器",
+reloadconfig =	"TaiHen 设置",
+configtxt =		"加載 taiHEN 設置文件",
+disablesuprx =	"关闭插件？",
+
+------------	ThemesLivearea		-------------------------------------------------------------------------
+customthemes =	"自定义主题 LiveArea",
+notthemes =		"主題列表無效/錯誤！",
+deltheme =		"从 app.db 中卸载自定义主题？",
+delfilestheme =	"从自定义主题删除文件？",
+
+result =		"\n结果: ",
+count =			"数量: ",
+sizeis =		"大小: ",
+openmusic =		"打开 Mp3 播放器或图库？",
+filesfolders =	"文件/文件夹",
+
+}
