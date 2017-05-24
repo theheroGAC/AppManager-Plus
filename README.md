@@ -1,6 +1,6 @@
 # AppManagerPlus
 
--![header](Preview.png)
+![header](Preview.png)
 
 An easy to use App Manager for, as the name suggests, manage your PS Vita apps/files and your PSP games.
 

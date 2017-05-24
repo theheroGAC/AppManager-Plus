@@ -18,7 +18,7 @@ makedir =		"Crear carpeta",
 rename =		"Renombrar",
 extract =		"Extraer",
 cancel =		"Cancelar",
-insvpkfromdir = "Instalar Game",
+insvpkfromdir = "Instalar Juego",
 instheme =		"Instalar CTema",
 extractto =		"Extraer a",
 paste =			"Pegar",
@@ -29,13 +29,19 @@ export =		"Exportar",
 themes =		"Temas AppMan",
 pluginsman =	"Plugins Man",
 cthemesman =	"CustomThemes",
+ftp =			"FTP",
 
 items =			"Items Sel: ",
 
 ------------	Ftp 		-----------------------------------------------
-ftp =			"Entra esta dirección IP en tu Dispositivo o PC",
+textftp =		"Entra esta dirección IP en tu Dispositivo o PC",
 closeftp =		"Presiona START para cerrar la conexión FTP",
 loseftp =		"Conexion FTP Cerrada",
+
+------------	USB 		-----------------------------------------------
+connectusb =	"Conecta un cable USB",
+usbconnection = "Conexión USB habilitada",
+cancelusb =		"Desactivar",
 
 imgerror =		"Error Imagen no soportada",
 
@@ -63,7 +69,10 @@ empty =			"Vacio/Error",
 toexplorer =	"Explorador de Archivos",
 
 --SearchingVpks
-vpktittle =		"Instalar Vpks ",
+vpktittle =		"Escaneo Vpks ",
+wait =			"Por Favor Espere...",
+nofinds =		"No se encontró ningún archivo",
+reloadfull =	"Escaneo completo en ux0:/ur0:",
 moveiso2ux0 =	"Juego movido a ux0:pspemu/ISO",
 moveiso2ur0 =	"Juego movido a ur0:pspemu/ISO",
 
@@ -74,10 +83,11 @@ percent =		"Porcentaje: ",
 percent_total = "Porcentaje Total: ",
 total_size =	"Tamaño Total: ",
 total_written = "Total Escrito: ",
+
 --onAppInstall
 searchunsafe =	"Buscar en el vpk archivos inseguros o peligrosos!",
-unsafevpk =		"Permisos extendidos y acceso a información personal  y requeridos! \nTen cuidado con VPKs de fuentes no confiables! \nQuieres instalar bajo tu propio riesgo?",
-dangerousvpk =	"Peligro!!! Alto riesgo de dañar tu consola \nsi se instala este VPK! \nTen cuidado con VPKs de fuentes no confiables! \nQuieres instalar bajo tu propio riesgo?",
+unsafevpk =		"Permisos extendidos y acceso a información personal  y requeridos! \n\nTen cuidado con VPKs de fuentes no confiables! \n\nQuieres instalar bajo tu propio riesgo?",
+dangerousvpk =	"Peligro!!! Alto riesgo de dañar tu consola si se instala este VPK! \n\nTen cuidado con VPKs de fuentes no confiables! \n\nQuieres instalar bajo tu propio riesgo?",
 vpkunpack =		"Desempacando vpk...",
 install =		"Instalando...",
 
@@ -91,7 +101,7 @@ size_unpk =		"Tamaño desempacado: ",
 
 --Launch PBP or VPK
 launchpbp =		"Iniciar juego/app ",
-confirm =		"X: Aceptar  |  O: Cancelar",
+confirm =		"Aceptar",
 warningvpk =	"\nPELIGRO ACCESO TOTAL\nVPK INSEGURO",
 warningvpk2 =	"PELIGRO ACCESO TOTAL",
 safevpk =		"VPK SEGURO",
