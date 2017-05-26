@@ -15,4 +15,9 @@
 - Automatic online update.<br>
     ]]>
   </changes>
+    <changes app_ver="02.20">
+    <![CDATA[
+- Avoids exiting to Livearea by disabling the PS button.<br>
+    ]]>
+  </changes>
 </changeinfo>
