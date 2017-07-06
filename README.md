@@ -12,7 +12,9 @@ As a bonus feature you can design your own theme for AppManagerPlus, with a set 
 
 ""Special thanks to Wz-jk for graphic design""
 
-v2.0
+![header](versions.png)
+
+## Changelog 2.0 ##
 
 Please update your lang.lua in ux0:/data/AppManPlus/lang.lua
 
