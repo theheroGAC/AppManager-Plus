@@ -1,5 +1,9 @@
 dofile("git/shared.lua")
 
+if files.exists("ux0:/app/AMUPDATER") then
+	game.delete("AMUPDATER") -- Exists delete update app
+end
+
 if files.exists("ux0:/app/ONEUPDATE") then
 	game.delete("ONEUPDATE") -- Exists delete update app
 end
