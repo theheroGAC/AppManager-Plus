@@ -14,6 +14,19 @@ As a bonus feature you can design your own theme for AppManagerPlus, with a set 
 
 ![header](versions.png)
 
+## Changelog 3.0 ##
+- Added uma0: partition support.<br>
+- Hability to move games/apps between  uma0/ur0/ux0 partitions	(The savedata issue still pops up when moving games to ur0).<br>
+- Video export function added (Thanks to The_Flow).<br>
+- USB function removed.<br>
+- Now you can toggle between partitions with L and R in the file explorer.<br>
+- The functions: Install Customthemes,  AppManager Themes and Vpk Scan were moved Advanced section.<br>
+- Added 3 functions in the Options Submenu: Restart APM, Restart OS and Turn off.<br>
+- Reorganization of AppManager Themes, and new lines were added for translations of AppManager+.<br>
+- Whole lot of bugs corrected.<br>
+- Reorganized and cleaned up the code.<br>
+*NOTE: Please delete the folder AppManPlus from path ux0:data/ for the new version.<br>*
+
 ## Changelog 2.0 ##
 
 Please update your lang.lua in ux0:/data/AppManPlus/lang.lua
