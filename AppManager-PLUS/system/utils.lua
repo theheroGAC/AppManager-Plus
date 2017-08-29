@@ -18,6 +18,26 @@ if buttons.assign()==0 then
 	accept_x = 0
 end
 
+infoux0, infour0, infouma0 = {},{},{}
+function infodevices()
+	infoux0 = os.devinfo("ux0:")
+	if files.exists("ur0:") then
+		infour0 = os.devinfo("ur0:")
+	end
+	if files.exists("uma0:") then
+		infouma0 = os.devinfo("uma0:")
+	end
+
+	infoux0.maxf = files.sizeformat(infoux0.max or 0)
+	infour0.maxf = files.sizeformat(infour0.max or 0)
+	infouma0.maxf = files.sizeformat(infouma0.max or 0)
+
+	infoux0.freef = files.sizeformat(infoux0.free or 0)
+	infour0.freef = files.sizeformat(infour0.free or 0)
+	infouma0.freef = files.sizeformat(infouma0.free or 0)
+
+end
+
 function ini.load(path) -- Translate a ini file to table lua! :D
     if not files.exists(path) then return nil end
     local fp = io.open(path, "r")
@@ -207,26 +227,21 @@ function newScroll(a,b,c)
 
 end
 
-function reload_configtxt()
-	os.taicfgreload()
-	os.delay(100)
-	os.message(strings.configtxt)
-end
-
 function usbMassStorage()
 
     local buff = screen.buffertoimage()
 	local titlew = screen.textwidth(strings.connectusb) + 30
 
-	while usb.cable() != 1 and usb.state() != 1 do
+	while usb.cable() != 1 do--and usb.state() != 1 do
 		power.tick(1)
 		buttons.read()
 		buff:blit(0,0)
 
-		draw.fillrect(450-(titlew/2),272-20,titlew,70,theme.style.BARCOLOR)
-		draw.rect(450-(titlew/2),272-20,titlew,70,color.white)
+		draw.fillrect(450-(titlew/2),272-20,titlew,100,theme.style.BARCOLOR)
+		draw.rect(450-(titlew/2),272-20,titlew,100,color.white)
 		screen.print(450,272-20+13, strings.connectusb,1,color.white,color.black,__ACENTER)
-		screen.print(450,272-20+40, textXO..strings.cancelusb,1,color.white,color.black,__ACENTER)
+		screen.print(450,272-20+40, Root[ Dev + NDev],1,color.white,color.black,__ACENTER)
+		screen.print(450,272-20+67, textXO..strings.cancelusb,1,color.white,color.black,__ACENTER)
 
 		screen.flip()
 
@@ -235,7 +250,13 @@ function usbMassStorage()
 		end
 	end
 
-	usb.start()
+	--Dev 1 = ux0	->	mod_usb = 0
+	--Dev 2 = ur0	->	mod_usb = 1
+	--Dev 3 = uma0	->	mod_usb = 2
+	local mod_usb = 0
+	if Dev == 2 then mod_usb = 1 elseif Dev == 3 then mod_usb = 2 end
+
+	usb.start(mod_usb)
 
 	titlew = screen.textwidth(strings.usbconnection) + 30
 	while not buttons[cancel] do
@@ -243,14 +264,16 @@ function usbMassStorage()
 		buttons.read()
 		buff:blit(0,0)
 
-		draw.fillrect(450-(titlew/2),272-20,titlew,70,theme.style.BARCOLOR)
-		draw.rect(450-(titlew/2),272-20,titlew,70,color.white)
+		draw.fillrect(450-(titlew/2),272-20,titlew,100,theme.style.BARCOLOR)
+		draw.rect(450-(titlew/2),272-20,titlew,100,color.white)
 		screen.print(450,272-20+13, strings.usbconnection,1,color.white,color.black,__ACENTER)
-		screen.print(450,272-20+40, textXO..strings.cancelusb,1,color.white,color.black,__ACENTER)
+		screen.print(450,272-20+40, Root[ Dev + NDev],1,color.white,color.black,__ACENTER)
+		screen.print(450,272-20+67, textXO..strings.cancelusb,1,color.white,color.black,__ACENTER)
 
 		screen.flip()
 	end
 
+	--infosize = os.devinfo(Root[Dev+2])
 	usb.stop()
 
 end

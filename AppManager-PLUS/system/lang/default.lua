@@ -1,7 +1,7 @@
 --Texts
 strings = {
 
--------------	Explorer	----------------------------------------------
+-------------	Explorer	---------------------------------------------------------------------------------
 back =			"Return ",
 copyfile =		"Copying: ",
 delfile =		"Deleting: ",
@@ -24,21 +24,25 @@ extractto =		"Extract To",
 paste =			"Paste",
 move =			"Move",
 size =			"Size",
-scanvpks =		"ScanVpks",
+scanvpks =		"Content Scanner (VPK/ISO/CSO)",
 export =		"Export",
-themes =		"Themes AppM",
+themes =		"Themes AppManager+",
 pluginsman =	"Plugins Man",
-cthemesman =	"CustomThemes",
+cthemesman =	"LiveArea CustomThemes",
 ftp =			"FTP",
+restarthb =		"Restart AppMan",
+reset =			"Power Reset",
+off =			"Shutdown",
 
 items =			"Sel Items: ",
 
-------------	Ftp 		-----------------------------------------------
+------------	Ftp 		---------------------------------------------------------------------------------
 textftp =		"Enter this FTP addres to your device or PC",
 closeftp =		"Press START to close FTP conection",
 loseftp =		"FTP Conection Closed",
 
-------------	USB 		-----------------------------------------------
+------------	USB 		---------------------------------------------------------------------------------
+usb =			"USB",
 connectusb =	"Connect a USB cable",
 usbconnection = "USB Connection Enabled",
 cancelusb =		"Disabled",
@@ -58,31 +62,34 @@ switch =		"Really wish to switch ",
 nomemory =		"Not enough memory...",
 appremove =		"Really wish to Uninstall ",
 delclon	=		"Delete this CLON: ",
-updatedb =		"Your PSVita will restart...\nand your database will be rebuilt",
 manual =		"Do you really want to remove this manual",
 notmanual =		"Manual has been removed!",
 notfindmanual =	"Manual not exist",
 removemanual =	"Remove manual",
 pressremove =	"Uninstall",
-pressswitch =	"Swicht (ux0<->ur0)",
+switchapp =		"Switch Apps",
 empty =			"Empty/Error",
 toexplorer =	"Explorer",
+partitions =	"Partitions",
 
 --SearchingVpks
 vpktittle =		"Vpks Searchs",
 wait =			"Please wait...",
 nofinds =		"No files were found",
-reloadfull =	"Full Scan of ux0:/ur0:",
+reloadfull =	"Full Scan of ux0/ur0/uma0",
 moveiso2ux0 =	"Move Game to ux0:pspemu/ISO",
 moveiso2ur0 =	"Move Game to ur0:pspemu/ISO",
+moveiso2uma0 =	"Move Game to uma0:pspemu/ISO",
 
--------------		Callbacks		---------------------------------------------------------------------
+-------------		Callbacks		-------------------------------------------------------------------------
 unsafe =		"Unsafe: ",
 file =			"File: ",
 percent =		"Percent: ",
 percent_total = "Percent Total: ",
 total_size =	"Total Size: ",
 total_written = "Total Written: ",
+speed =			"Speed: ",
+remaining =		"Remaining time: ",
 
 --onAppInstall
 searchunsafe =	"Search in vpk, Unsafe or Dangerous files!",
@@ -97,7 +104,7 @@ extraction =	"Extraction...",
 --onScanningFiles
 scanning =		"Scanning...",
 size_unpk =		"Size Unpack: ",
------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------
 
 --Launch PBP or VPK
 launchpbp =		"Launch game/app ",
@@ -113,7 +120,7 @@ alertdang =		"VPK DANGEOROUS!!!!",
 installvpkdir =	"INSTALL VPK FROM DIR",
 launchbin =		"Launch app ",
 
-------------	Switch Apps/vpks	------------------------------------------------------------------------
+------------	Switch Apps/vpks	-------------------------------------------------------------------------
 required =		"\nRequired: ",
 searchapp =		"\nWould you like to switch an app to ur0 ?",
 vpktour0 =		"Would you like to move the vpk to ur0: so you can install it ?",
@@ -144,10 +151,19 @@ notthemes =		"Empty/Error in theme list!",
 deltheme =		"Uninstall CustomTheme from app.db",
 delfilestheme =	"Delete files from CustomTheme ?",
 
+------------	Advanced	---------------------------------------------------------------------------------
+advanced =		"Advanced",
+refreshdb =		"Update app.db",
+rebuilddb =		"Rebuild app.db",
+restartupdb =	"Your PSVita will Restart...\nand your database will be update",
+restartredb =	"Your PSVita will Restart...\nand your database will be rebuilt",
+restart =		"Your PSVita will Restart...",
+shutdown =		"Your PSVita will Shutdown...",
+
 result =		"\nResult: ",
 count =			"Count: ",
 sizeis =		"Size is: ",
-openmusic =		"Open Mp3 Player/Gallery ?",
+opensettings =	"Open Mp3 Player/Gallery/Video ?",
 filesfolders =	"Files/Folders",
 
 }

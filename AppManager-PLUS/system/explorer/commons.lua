@@ -8,8 +8,16 @@ function show_msg_pbp(handle)
 	local icon0 = game.geticon0(handle.path)
 	local sfo = game.info(handle.path)
 
+	local launch=false
+	if (sfo.CATEGORY == "EG" or sfo.CATEGORY == "ME") then
+		if sfo.DISC_ID and game.exists(sfo.DISC_ID) then
+			launch=true
+		end
+	end
+
+	local name=handle.name:lower()
 	--Maybe work with PS1
-	local res = false
+	local res,xscr = false,290
 	while true do
 		buttons.read()
 		bufftmp:blit(0,0)
@@ -18,16 +26,22 @@ function show_msg_pbp(handle)
 		draw.rect(x,y,420,420,color.white)
 
 		if sfo then
-			if sfo.CATEGORY == "EG" or sfo.CATEGORY == "ME" then
+			if launch then
 				screen.print(960/2,y+15,strings.launchpbp,1,color.black,color.blue,__ACENTER)
+	
 				if accept_x == 1 then
-					screen.print(960/2,y+400,"X "..strings.confirm.." | ".."O "..strings.cancel,1,color.black,color.blue,__ACENTER)
+					screen.print(960/2,y+400,string.format("%s"..strings.confirm.." | %s "..strings.cancel,SYMBOL_CROSS, SYMBOL_CIRCLE),1,color.black,color.blue,__ACENTER)
 				else
-					screen.print(960/2,y+400,"O "..strings.confirm.." | ".."X "..strings.cancel,1,color.black,color.blue,__ACENTER)
+					screen.print(960/2,y+400,string.format("%s"..strings.confirm.." | %s "..strings.cancel,SYMBOL_CIRCLE, SYMBOL_CROSS),1,color.black,color.blue,__ACENTER)
 				end
 			end
-			screen.print(960/2,y+40,tostring(sfo.TITLE),1,color.black,color.blue,__ACENTER)
-			screen.print(960/2,y+60,sfo.DISC_ID or sfo.TITLE_ID,1,color.black,color.blue,__ACENTER)
+
+			if screen.textwidth(tostring(sfo.TITLE) or "UNK") > 380 then
+				xscr = screen.print(xscr, y+40, tostring(sfo.TITLE) or "UNK",1,color.black,color.blue,__SLEFT,380)
+			else
+				screen.print(960/2,y+40,tostring(sfo.TITLE) or "UNK",1,color.black,color.blue,__ACENTER)
+			end
+			screen.print(960/2,y+60,tostring(sfo.DISC_ID) or tostring(sfo.TITLE_ID),1,color.black,color.blue,__ACENTER)
 		end
 
 		if icon0 then
@@ -41,10 +55,7 @@ function show_msg_pbp(handle)
 
 		if buttons[accept] or buttons[cancel] then
 			if buttons[accept] then
-				if sfo and (sfo.CATEGORY == "EG" or sfo.CATEGORY == "ME") then
-					if sfo.DISC_ID then game.launch(sfo.DISC_ID) end
-					if sfo.TITLE_ID then game.launch(sfo.TITLE_ID) end
-				end
+				if launch then game.launch(sfo.DISC_ID) end
 			end
 			break
 		end
@@ -102,7 +113,9 @@ function MusicPlayer(handle)
 				screen.print(425,120, str,1.0,color.white,color.black)
 
 				local pos,size,base,perc = snd:porcent()
-				draw.fillrect(425,145,((perc*350)/100),10,color.green)
+				if perc then
+					draw.fillrect(425,145,((perc*350)/100),10,color.green)
+				end
 				draw.rect(425,145,350,10,color.white)
 
 				if id3 and id3.title then
@@ -200,7 +213,7 @@ function visortxt(handle)
 		buttons.read()
 		if theme.data["list"] then theme.data["list"]:blit(0,0) end
 
-		if buttons.circle then
+		if buttons[cancel] then
 			--buttons.interval(10,6)
 			break
 		end

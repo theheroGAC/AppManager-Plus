@@ -5,33 +5,36 @@ plugman = { -- Modulo Plugins Manager.
 	gameid = "", -- Gameid of select.
 }
 
-function plugman.load() -- Load a config of tai plugins.
-	local path = "ux0:tai/config.txt"
-    local gameid,ind,next = "",0,false -- Some vars to hand
-	plugman.cfg, plugman.list = {}, {} -- Set to Zero
-	
-	if files.exists(path) then -- Only read if exists LOL xD
+function plugman.load()
+    local path = "ux0:tai/config.txt"
+	plugman.cfg = {} -- Set to Zero
+	plugman.list = {} -- Set to Zero
+if not files.exists(path) then path = "ur0:tai/config.txt" end
+	if files.exists(path) then
+		local id_sect = nil
+		local i = 1;
 		for line in io.lines(path) do
-			ind+=1
 			table.insert(plugman.cfg,line)
-			if next then --next
-				if not line:find("#",1,5) then --if line:find("ux0:app/MLCL00001") then
-					table.insert(plugman.list[gameid], {name = files.nopath(line), path = line, exists = files.exists(line)})
-					next=false
-				end
-			else
-				if line:find("*",1) then -- if line:find("*KERNEL",1,10) or line:find("*main",1,10) then next = next	
-					gameid = line:sub(2)
-					next = true
-					if not plugman.list[gameid] then
-						plugman.list[gameid] = {ln=ind} --table.insert(plugins, { gameid = line:sub(2), indexg = ind, prkx="", indexp="" })--save GAMEID,ln Gameid
+			
+			if line:find("*",1) then -- Secction Found
+				id_sect = line:sub(2)
+				if not plugman.list[id_sect] then plugman.list[id_sect] = {sectln = i} end
+				continue
+			end
+			
+			if id_sect then
+				if #line > 0 then
+					local state = line:find("#",1)
+					line = line:gsub('#',''):lower()
+					if line:sub(1,4) == "ux0:" or line:sub(1,4) == "ur0:" then
+						table.insert(plugman.list[id_sect],{name = files.nopath(line), path = line, exists = files.exists(line), line = i, state = state})
 					end
 				end
 			end
+			
+			i += 1
 		end
-		return true
 	end
-	return false
 end
 
 function plugman.ctrl()

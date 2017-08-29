@@ -1,7 +1,7 @@
 --Texts
 strings = {
 
--------------	Explorer	----------------------------------------------
+-------------	Explorer	---------------------------------------------------------------------------------
 back =			"Regresar ",
 copyfile =		"Copiando: ",
 delfile =		"Eliminando: ",
@@ -24,21 +24,25 @@ extractto =		"Extraer a",
 paste =			"Pegar",
 move =			"Mover",
 size =			"Tamaño",
-scanvpks =		"Buscar Vpks",
+scanvpks =		"Buscador de VPK y contenido PSP (ISO/CSO)",
 export =		"Exportar",
-themes =		"Temas AppMan",
+themes =		"Temas AppManager+",
 pluginsman =	"Plugins Man",
-cthemesman =	"CustomThemes",
+cthemesman =	"LiveArea CustomThemes",
 ftp =			"FTP",
+restarthb =		"Reiniciar Hb",
+reset =			"Reiniciar",
+off =			"Apagar",
 
 items =			"Items Sel: ",
 
-------------	Ftp 		-----------------------------------------------
+------------	Ftp 		---------------------------------------------------------------------------------
 textftp =		"Entra esta dirección IP en tu Dispositivo o PC",
 closeftp =		"Presiona START para cerrar la conexión FTP",
 loseftp =		"Conexion FTP Cerrada",
 
-------------	USB 		-----------------------------------------------
+------------	USB 		---------------------------------------------------------------------------------
+usb =			"USB",
 connectusb =	"Conecta un cable USB",
 usbconnection = "Conexión USB habilitada",
 cancelusb =		"Desactivar",
@@ -58,31 +62,34 @@ switch =		"Realmente quieres mover ",
 nomemory =		"No hay memoria suficiente...",
 appremove =		"Realmente quieres Desinstalar ",
 delclon	=		"Eliminar este CLON: ",
-updatedb =		"Tú PSVita se reiniciará...\ny tu base de datos será solo actualizada",
 manual =		"Realmente deseas Eliminar el Manual",
 notmanual =		"Manual Eliminado",
 notfindmanual =	"Manual no encontrado",
 removemanual =	"Eliminar Manual",
 pressremove =	"Desinstalar",
-pressswitch =	"Mover (ux0<->ur0)",
+switchapp =		"Switch Apps",
 empty =			"Vacio/Error",
 toexplorer =	"Explorador de Archivos",
+partitions =	"Particiones",
 
 --SearchingVpks
 vpktittle =		"Escaneo Vpks ",
 wait =			"Por Favor Espere...",
 nofinds =		"No se encontró ningún archivo",
-reloadfull =	"Escaneo completo en ux0:/ur0:",
+reloadfull =	"Escaneo completo en ux0/ur0/uma0",
 moveiso2ux0 =	"Juego movido a ux0:pspemu/ISO",
 moveiso2ur0 =	"Juego movido a ur0:pspemu/ISO",
+moveiso2uma0 =	"Juego movido a uma0:pspemu/ISO",
 
--------------		Callbacks		---------------------------------------------------------------------
+-------------		Callbacks		-------------------------------------------------------------------------
 unsafe =		"Inseguro: ",
 file =			"Archivo: ",
 percent =		"Porcentaje: ",
 percent_total = "Porcentaje Total: ",
 total_size =	"Tamaño Total: ",
 total_written = "Total Escrito: ",
+speed =			"Velocidad: ",
+remaining =		"Tiempo Restante: ",
 
 --onAppInstall
 searchunsafe =	"Buscar en el vpk archivos inseguros o peligrosos!",
@@ -97,7 +104,7 @@ extraction =	"Extrayendo...",
 --onScanningFiles
 scanning =		"Revisando...",
 size_unpk =		"Tamaño desempacado: ",
------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------
 
 --Launch PBP or VPK
 launchpbp =		"Iniciar juego/app ",
@@ -113,7 +120,7 @@ alertdang =		"VPK PELIGROSO!!!!",
 installvpkdir =	"INSTALAR VPK DESDE CARPETA",
 launchbin =		"Ejecutar App ",
 
-------------	Switch Apps/vpks	------------------------------------------------------------------------
+------------	Switch Apps/vpks	-------------------------------------------------------------------------
 required =		"\nRequerido: ",
 searchapp =		"\nDeseas buscar una app para mover a ur0 ?",
 vpktour0 =		"Deseas mover el vpk a ur0: para poder instalar",
@@ -144,10 +151,19 @@ notthemes =		"No hay temas/Error la lista de Temas!",
 deltheme =		"Desinstalar Tema Personalizado de app.db",
 delfilestheme =	"Eliminar archivos del Tema Personalizado ?",
 
+------------	Advanced	---------------------------------------------------------------------------------
+advanced =		"Avanzado",
+refreshdb =		"Actualizar app.db",
+rebuilddb =		"Reconstruir app.db",
+restartupdb =	"Tú PSVita se reiniciará...\ny tu base de datos será Actualizada",
+restartredb =	"Tú PSVita se reiniciará...\nY tu base de datos será Reconstruida",
+restart =		"Tú PSVita se reiniciará...",
+shutdown =		"Tu PSVita se Apagara...",
+
 result =		"\nResultado: ",
 count =			"Total: ",
 sizeis =		"Tamaño es: ",
-openmusic =		"Abrir App Mp3/Galería ?",
+opensettings =	"Abrir App Mp3/Galería/Videos ?",
 filesfolders =	"Carpetas/Archivos",
 
 }

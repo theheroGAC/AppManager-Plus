@@ -1,7 +1,7 @@
 --Texts
 strings = {
 
--------------	Explorer	----------------------------------------------
+-------------	Explorer	---------------------------------------------------------------------------------
 back =			"Retour ",
 copyfile =		"Copié: ",
 delfile =		"Supprimé: ",
@@ -24,21 +24,25 @@ extractto =		"Extraire Vers",
 paste =			"Coller",
 move =			"Déplacer",
 size =			"Taille",
-scanvpks =		"ScannerVpks",
+scanvpks =		"Content Scanner (VPK/ISO/CSO)",
 export =		"Exportez",
-themes =		"Thèmes AppMan",
+themes =		"Thèmes AppManager+",
 pluginsman =	"Plugins Man",
-cthemesman =	"CustomThèmes",
+cthemesman =	"LiveArea CustomThèmes",
 ftp =			"FTP",
+restarthb =		"Restart AppMan",
+reset =			"Power Reset",
+off =			"Shutdown",
 
 items =			"Eléments Sel: ",
 
-------------	Ftp 		-----------------------------------------------
-ftp =			"Entrez cette addresse FTP sur votre appareil ou votre PC",
+------------	Ftp 		---------------------------------------------------------------------------------
+textftp =		"Entrez cette addresse FTP sur votre appareil ou votre PC",
 closeftp =		"Appuyez sur START pour arrêter la connexion FTP",
 loseftp =		"Connexion FTP Arrêté",
 
-------------	USB 		-----------------------------------------------
+------------	USB 		---------------------------------------------------------------------------------
+usb =			"USB",
 connectusb =	"Connectez un cable USB",
 usbconnection = "Connexion USB Activé",
 cancelusb =		"Désactivé",
@@ -58,31 +62,34 @@ switch =		"Vraiment envie de switch ",
 nomemory =		"Pas assez de mémoire...",
 appremove =		"Vraiment envie de Désinstaller ",
 delclon	=		"Supprimer ce CLON: ",
-updatedb =		"Votre PSVita va redémarrer...\net votre base de donnée va être reconstruite",
 manual =		"Voulez vous vraiment supprimer ce manuel",
 notmanual =		"Le Manuel a été supprimé !",
 notfindmanual =	"Le manuel n'existe pas",
 removemanual =	"Supprimer Manuel",
 pressremove =	"Désinstaller",
-pressswitch =	"Déplacer (ux0<->ur0)",
+switchapp =		"Déplacer Apps",
 empty =			"Vide/Erreur",
 toexplorer =	"Explorateur",
+partitions =	"Partitions",
 
 --SearchingVpks
 vpktittle =		"Recherches Vpks",
 wait =			"Merci de patienter...",
 nofinds =		"Aucun fichiers trouvés",
-reloadfull =	"Tout scanner dans ux0:/ur0:",
+reloadfull =	"Tout scanner dans ux0/ur0/uma0",
 moveiso2ux0 =	"Déplacer Jeux vers ux0:pspemu/ISO",
 moveiso2ur0 =	"Déplacer Jeux vers ur0:pspemu/ISO",
+moveiso2uma0 =	"Déplacer Jeux vers uma0:pspemu/ISO",
 
--------------		Callbacks		---------------------------------------------------------------------
+-------------		Callbacks		-------------------------------------------------------------------------
 unsafe =		"Peu sur : ",
 file =			"Fichier : ",
 percent =		"Pourcentage : ",
 percent_total = "Pourcentage Total : ",
 total_size =	"Taille Total : ",
 total_written = "Total Ecris : ",
+speed =			"Speed: ",
+remaining =		"Remaining time: ",
 
 --onAppInstall
 searchunsafe =	"Cherche dans le vpk, Non sur ou des fichiers Dangereux !",
@@ -97,7 +104,7 @@ extraction =	"Extraction...",
 --onScanningFiles
 scanning =		"Balayage...",
 size_unpk =		"Taille Décompressé : ",
------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------
 
 --Launch PBP or VPK
 launchpbp =		"Lancer jeu/app ",
@@ -113,7 +120,7 @@ alertdang =		"VPK DANGEREUX!!!!",
 installvpkdir =	"INSTALLER VPK DEPUIS DIR",
 launchbin =		"Lancer app ",
 
-------------	Switch Apps/vpks	------------------------------------------------------------------------
+------------	Switch Apps/vpks	-------------------------------------------------------------------------
 required =		"\nRequis: ",
 searchapp =		"\nVoulez vous déplacer une application vers ur0 ?",
 vpktour0 =		"Voulez vous déplacer le vpk vers ur0: si vous l'installez ?",
@@ -144,10 +151,19 @@ notthemes =		"Vide/Erreur dans la liste des thèmes !",
 deltheme =		"Désinstaller un CustomTheme dans app.db",
 delfilestheme =	"Supprimer des fichiers depuis CustomTheme ?",
 
+------------	Advanced	---------------------------------------------------------------------------------
+advanced =		"Advanced",
+refreshdb =		"Update app.db",
+rebuilddb =		"Rebuild app.db",
+restartupdb =	"Your PSVita will Restart...\nand your database will be update",
+restartredb =	"Your PSVita will Restart...\nand your database will be rebuilt",
+restart =		"Your PSVita will Restart...",
+shutdown =		"Your PSVita will Shutdown...",
+
 result =		"\nRésultat : ",
 count =			"Nombre : ",
 sizeis =		"La taille est dev : ",
-openmusic =		"Ouvrir le Lecteur MP3/Galerie ?",
+opensettings =	"Ouvrir le Lecteur MP3/Galerie/Video ?",
 filesfolders =	"Fichiers/Dossiers",
 
 }

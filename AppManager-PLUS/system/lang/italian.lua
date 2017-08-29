@@ -1,7 +1,7 @@
 --Texts
 strings = {
 
--------------	Explorer	----------------------------------------------
+-------------	Explorer	---------------------------------------------------------------------------------
 back =			"Indietro ",
 copyfile =		"Copia: ",
 delfile =		"Elimina: ",
@@ -24,21 +24,25 @@ extractto =		"Estrai il contenuto su",
 paste =			"Incolla",
 move =			"Muovi",
 size =			"Formato",
-scanvpks =		"Ricerca i file Vpk",
+scanvpks =		"Content Scanner (VPK/ISO/CSO)",
 export =		"Esporta",
-themes =		"Temi AppMan",
+themes =		"Temi AppManager+",
 pluginsman =	"Plugins Man",
-cthemesman =	"Temi personalizzati",
+cthemesman =	"LiveArea Temi personalizzati",
 ftp =			"FTP",
+restarthb =		"Restart Hb",
+reset =			"Power Reset",
+off =			"Shutdown",
 
 items =			"Seleziona Elementi: ",
 
-------------	Ftp 		-----------------------------------------------
-ftp =			"Inserire l'indirizzo IP sul dispositivo o PC",
+------------	Ftp 		---------------------------------------------------------------------------------
+textftp =		"Inserire l'indirizzo IP sul dispositivo o PC",
 closeftp =		"Premere START per chiudere la connessione FTP",
 loseftp =		"Connessione FTP chiusa",
   
-  ------------	USB 		-----------------------------------------------
+------------	USB 		---------------------------------------------------------------------------------
+usb =			"USB",
 connectusb =	"Connettere il dispositivo con un cavo USB ",
 usbconnection = "Connessione USB Stabilita",
 cancelusb =		"Disabilitato",
@@ -58,31 +62,35 @@ switch =		"Sei sicuro di voler spostare ",
 nomemory =		"Memoria insufficiente ......",
 appremove =		"Sei sicuro di voler disinstallare ",
 delclon	=		"Cancella questo CLONE ",
-updatedb =		"La PSVita sarà riavviata...\solo il database verrà aggiornato",
 manual =		"Vuoi realmente eliminarlo Manualmente",
 notmanual =		"Eliminazione effettuata manualmente",
 notfindmanual =	"Manuale non trovato",
 removemanual =	"Eliminazione Manuale",
 pressremove =	"Disinstalla",
-pressswitch =	"Sposta (ux0<->ur0)",
+switchapp =		"Sposta Apps",
 empty =			"Vuoto/Errore",
 toexplorer =	"File explorer",
+partitions =	"Partitions",
 
 --SearchingVpks
 vpktittle =		"Installare i Vpk ",
 wait =			"Attendere prego...",
 nofinds =		"Nessun file trovato",
-reloadfull =	"Scansione completa di ux0:/ur0:",
+reloadfull =	"Scansione completa di ux0/ur0/uma0",
 moveiso2ux0 =	"Gioco sposato su ux0:pspemu/ISO",
 moveiso2ur0 =	"Gioco spostato su ur0:pspemu/ISO",
+moveiso2uma0 =	"Gioco spostato su uma0:pspemu/ISO",
 
--------------		Callbacks		---------------------------------------------------------------------
+-------------		Callbacks		-------------------------------------------------------------------------
 unsafe =		"Insicuro: ",
 file =			"File: ",
 percent =		"Percentuale: ",
 percent_total = "Percentuale Totale: ",
 total_size =	"Spazio Totale: ",
 total_written = "Scrittura Totale: ",
+speed =			"Speed: ",
+remaining =		"Remaining time: ",
+
 --onAppInstall
 searchunsafe =	"Cerca i file VPK non sicuri o pericolosi!",
 unsafevpk =		"Permessi estesi e accesso a informazioni personali richieste! \nIl file VPK non è da una fonte attendibile! \nInstallare a proprio rischio?",
@@ -96,7 +104,7 @@ extraction =	"Estrazione in corso...",
 --onScanningFiles
 scanning =		"Scansione in corso...",
 size_unpk =		"Dimensione di spacchettamento : ",
------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------
 
 --Launch PBP or VPK
 launchpbp =		"Avviare il gioco/app ",
@@ -112,7 +120,7 @@ alertdang =		"VPK PERICOLOSO!!!!",
 installvpkdir =	"INSTALLARE IL FILE VPK IN UNA DIRECTORY",
 launchbin =		"Lanciare l' App ",
 
-------------	Switch Apps/vpks	------------------------------------------------------------------------
+------------	Switch Apps/vpks	-------------------------------------------------------------------------
 required =		"\nRichiesto: ",
 searchapp =		"\nDesideri cercare un app per spostarlo su ur0 ?",
 vpktour0 =		"Desideri spostare il file vpk su ur0: per poterlo installare",
@@ -143,10 +151,19 @@ notthemes =		"Nessun tema / Errore nella lista dei temi!",
 deltheme =		"Disinstallare il Tema Personalizzato da app.db",
 delfilestheme =	"Eliminare il file del Tema Personalizzato ?",
 
+------------	Advanced	---------------------------------------------------------------------------------
+advanced =		"Avanzato",
+refreshdb =		"Aggiorna app.db",
+rebuilddb =		"Ricostruisci app.db",
+restartupdb =	"La tua PSVita verrà riavviata ...\ne il tuo database verrà aggiornato",
+restartredb =	"La tua PSVita verrà riavviata ...\ne il tuo database verrà ricostruito",
+restart =		"La PSVita verrà riavviata...",
+shutdown =		"La PSVita si spegnerà...",
+
 result =		"\nRisultato: ",
 count =			"Totale: ",
 sizeis =		"La dimensione è: ",
-openmusic =		"Aprire l' App Mp3/Galleria ?",
+opensettings =	"Aprire l' App Mp3/Galleria/Video ?",
 filesfolders =	"Cartelle/File",
 
 }

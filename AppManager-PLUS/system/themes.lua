@@ -77,7 +77,7 @@ function theme.load()
 	isopened = { png = theme.style.IMAGECOLOR, jpg = theme.style.IMAGECOLOR, gif = theme.style.IMAGECOLOR, bmp = theme.style.IMAGECOLOR,
 		mp3 = theme.style.MUSICCOLOR, ogg = theme.style.MUSICCOLOR, wav = theme.style.MUSICCOLOR,
 		iso = theme.style.BINCOLOR, pbp = theme.style.BINCOLOR, cso = theme.style.BINCOLOR, dax = theme.style.BINCOLOR, bin = theme.style.BINCOLOR, suprx = theme.style.BINCOLOR, skprx = theme.style.BINCOLOR,
-		zip = theme.style.ARCHIVECOLOR, rar = theme.style.ARCHIVECOLOR, vpk = theme.style.ARCHIVECOLOR,
+		zip = theme.style.ARCHIVECOLOR, rar = theme.style.ARCHIVECOLOR, vpk = theme.style.ARCHIVECOLOR, gz = theme.style.ARCHIVECOLOR,
 		sfo = theme.style.SFOCOLOR,
 	}
 
@@ -104,20 +104,16 @@ function theme.manager()
 		table.insert(list,{id=thlist[i].name,title = title, author = author, preview = preview})
 	end
 
-	local pos = 1;
+	local theme_list = newScroll(list,15)
 	while true do
 
 		buttons.read()
 
-		if buttons.up then pos-= 1
-		elseif buttons.down then pos+=1 end
-
-
-		if pos < 1 then pos = 1
-		elseif pos > #list then pos = #list end
+		if buttons.up or buttons.analogly < -60 then theme_list:up() end
+		if buttons.down or buttons.analogly > 60 then theme_list:down() end
 
 		if buttons[accept] then
-			ini.write(pathini,"theme","id",list[pos].id)
+			ini.write(pathini,"theme","id",list[theme_list.sel].id)
 			theme.load()
 			os.message(strings.themesdone)
 		end
@@ -130,10 +126,10 @@ function theme.manager()
 
 		if theme.data["themesmanager"] then theme.data["themesmanager"]:blit(0,0) end
 
-		screen.print(480,15,strings.themesappman,1,theme.style.TITLECOLOR,color.blue,__ACENTER)
+		screen.print(480,15,strings.themesappman,1,theme.style.TITLECOLOR,color.gray,__ACENTER)
 		local y = 70
-		for i=1,#list do
-			if i == pos then
+		for i=theme_list.ini,theme_list.lim do
+			if i == theme_list.sel then
 				if list[i].preview then list[i].preview:resize(252,151) list[i].preview:blit(700,84) end
 				screen.print(700+126,240,list[i].author or "unk",1.0,theme.style.TITLECOLOR,theme.style.BKGCOLOR,__ACENTER)
 				draw.fillrect(15,y-3,675,25,theme.style.SELCOLOR)

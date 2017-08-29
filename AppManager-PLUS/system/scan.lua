@@ -44,11 +44,13 @@ function getvpks(_path, noscan)
 
 					elseif _type == 2 or _type == 3 then						--Its really iso/cso
 						if extension == "iso" or extension == "cso" then
-							if ( (pathtociso:sub(1,16) != "ux0:/pspemu/iso/") and (pathtociso:sub(1,16) != "ur0:/pspemu/iso/") ) then
+							if ( (pathtociso:sub(1,16) != "ux0:/pspemu/iso/") and (pathtociso:sub(1,16) != "ur0:/pspemu/iso/")
+								and (pathtociso:sub(1,17) != "uma0:/pspemu/iso/") ) then
 								table.insert(list_vpks.data, tmp[i])
 							end
 						else
-							if (pathtociso:sub(1,16) != "ux0:/pspemu/iso/") and (pathtociso:sub(1,16) != "ur0:/pspemu/iso/") then
+							if ((pathtociso:sub(1,16) != "ux0:/pspemu/iso/") and (pathtociso:sub(1,16) != "ur0:/pspemu/iso/")
+								and (pathtociso:sub(1,17) != "uma0:/pspemu/iso/") ) then
 								_ext="iso"
 								if _type == 3 then _ext="cso" end
 
@@ -82,27 +84,34 @@ function scan(full)
 	if full == 1 then
 		getvpks("ux0:",1)
 		getvpks("ur0:",1)
+		if files.exists("uma0:") then
+			getvpks("uma0:",1)
+		end
 	else
 		getvpks("ux0:video/")
 		getvpks("ux0:data/")
 		getvpks("ux0:vpk/")
+		getvpks("ux0:",0)
 		getvpks("ur0:video/")
 		getvpks("ur0:data/")
 		getvpks("ur0:vpk/")
-		getvpks("ux0:",0)
 		getvpks("ur0:",0)
+		if files.exists("uma0:") then
+			getvpks("uma0:video/")
+			getvpks("uma0:data/")
+			getvpks("uma0:vpk/")
+			getvpks("uma0:",0)
+		end
 	end
 
 	list_vpks.len = #list_vpks.data
 	
 	if list_vpks.len<=0 then
-		local titlew = screen.textwidth(strings.wait) + 30
-		draw.fillrect(450-(titlew/2),272-20,titlew,70,theme.style.BARCOLOR)
-		draw.rect(450-(titlew/2),272-20,titlew,70,color.white)
-		screen.print(450,272-20+13,strings.wait,1,color.white,color.black,__ACENTER)
-		screen.flip()
 		getvpks("ux0:",1)
 		getvpks("ur0:",1)
+		if files.exists("uma0:") then
+			getvpks("uma0:",1)
+		end
 		list_vpks.len = #list_vpks.data
 	end
 
@@ -117,7 +126,7 @@ function scan(full)
 
 		if theme.data["list"] then theme.data["list"]:blit(0,0) end
 
-		screen.print(480,15,strings.vpktittle,1,theme.style.TITLECOLOR,color.blue,__ACENTER)
+		screen.print(480,15,strings.vpktittle,1,theme.style.TITLECOLOR,color.gray,__ACENTER)
 		screen.print(950,15,strings.count + list_vpks.len,1,color.red,theme.style.BKGCOLOR,__ARIGHT)
 
 		if list_vpks.len > 0 then
@@ -125,44 +134,36 @@ function scan(full)
 			if buttons.down or buttons.analogly > 60 then srcn:down() end
 
 			if buttons[accept] then
-				if list_vpks.data[srcn.sel].ext:lower() == "vpk" then
 
+				local ext=list_vpks.data[srcn.sel].ext:lower()
+				local __path, mje = "ux0:pspemu/ISO", strings.moveiso2ux0
+
+				if ext == "vpk" then
 					buttons.homepopup(0)
 						show_msg_vpk(list_vpks.data[srcn.sel])
 					buttons.homepopup(1)
 
-				elseif list_vpks.data[srcn.sel].ext:lower() == "iso" or list_vpks.data[srcn.sel].ext:lower() == "cso" then
+				elseif ext == "iso" or ext == "cso" then
 
 					if list_vpks.data[srcn.sel].path:sub(1,3) == "ux0" then
-						reboot=false
-						files.move(list_vpks.data[srcn.sel].path,"ux0:pspemu/ISO")
-						reboot=true
-
-						if not files.exists(list_vpks.data[srcn.sel].path) then
-							table.remove(list_vpks.data, srcn.sel)
-							srcn:set(list_vpks.data,15)
-							os.message(strings.moveiso2ux0)
-						end
-
+						__path, mje = "ux0:pspemu/ISO", strings.moveiso2ux0
 					elseif list_vpks.data[srcn.sel].path:sub(1,3) == "ur0" then
-						reboot=false
-						files.move(list_vpks.data[srcn.sel].path,"ur0:pspemu/ISO")
-						reboot=true
-	
-						if not files.exists(list_vpks.data[srcn.sel].path) then
-							table.remove(list_vpks.data, srcn.sel)
-							srcn:set(list_vpks.data,15)
-							os.message(strings.moveiso2ur0)
-						end
+						__path, mje = "ur0:pspemu/ISO", strings.moveiso2ur0
+					elseif list_vpks.data[srcn.sel].path:sub(1,4) == "uma0" then
+						__path, mje = "uma0:pspemu/ISO", strings.moveiso2uma0
 					end
+
+					files.move(list_vpks.data[srcn.sel].path, __path)
+
 				end
 
-				buttons.read()
-				if vpkdel then
+				if vpkdel or not files.exists(list_vpks.data[srcn.sel].path) then
 					table.remove(list_vpks.data, srcn.sel)
 					srcn:set(list_vpks.data,15)
-					vpkdel=false
+					if vpkdel then vpkdel=false else os.message(mje) end
+					if list_vpks.len<=0 then os.message(strings.nofinds) return end
 				end
+				buttons.read()
 			end
 
 			if buttons.square then
@@ -174,6 +175,7 @@ function scan(full)
 							srcn:set(list_vpks.data,15)
 						end
 					reboot=true
+					if list_vpks.len<=0 then os.message(strings.nofinds) return end
 				end
 			end
 
@@ -197,19 +199,16 @@ function scan(full)
 
 		if buttons.select then
 			local titlew = screen.textwidth(strings.wait) + 30
-			draw.fillrect(450-(titlew/2),272-20,titlew,70,theme.style.BARCOLOR)
-			draw.rect(450-(titlew/2),272-20,titlew,70,color.white)
-			screen.print(450,272-20+13,strings.wait,1,color.white,color.black,__ACENTER)
+			draw.fillrect(480-(titlew/2),272-40,titlew,70,theme.style.BARCOLOR)
+			draw.rect(480-(titlew/2),272-40,titlew,70,color.white)
+			screen.print(480,(272-40)+13,strings.wait,1,color.white,color.black,__ACENTER)
 			screen.flip()
 			scan(1)
 		end
 
-		if buttons.start then											--USB
-			usbMassStorage()
-		end
-
-		if buttons.circle then selmenu = 2 break end
+		if buttons[cancel] then os.delay(55) break end
 		if (buttons.held.l and buttons.held.r and buttons.up) and reboot then os.restart() end
+		if (buttons.held.l and buttons.held.r and buttons.down) and reboot then power.restart() end
 
 		screen.flip()
 
