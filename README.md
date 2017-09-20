@@ -16,7 +16,7 @@ As a bonus feature you can design your own theme for AppManagerPlus, with a set 
 
 ## Changelog 3.0 ##
 - Added uma0: partition support.<br>
-- Hability to move games/apps between  uma0/ur0/ux0 partitions	(The savedata issue still pops up when moving games to ur0).<br>
+- Hability to move games/apps between  uma0/ur0/ux0 partitions	(The savedata issue still pops up when moving games to ur0/uma0).<br>
 - Video export function added (Thanks to The_Flow).<br>
 - USB function removed.<br>
 - Now you can toggle between partitions with L and R in the file explorer.<br>
