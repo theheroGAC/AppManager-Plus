@@ -14,6 +14,9 @@ As a bonus feature you can design your own theme for AppManagerPlus, with a set 
 
 ![header](versions.png)
 
+## Changelog 3.01 ##
+- Fix Updater (Only...).<br>
+
 ## Changelog 3.0 ##
 - Added uma0: partition support.<br>
 - Hability to move games/apps between  uma0/ur0/ux0 partitions	(The savedata issue still pops up when moving games to ur0/uma0).<br>
