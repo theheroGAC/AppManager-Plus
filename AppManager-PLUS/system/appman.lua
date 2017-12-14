@@ -78,7 +78,7 @@ function appman.refresh()
 			info = game.info(string.format("%s/eboot.pbp",appman.list[i].path))
 
 			appman.list[i].basegame = true
-			if info.CATEGORY and info.CATEGORY == "EG" then
+			if info and  info.CATEGORY and info.CATEGORY == "EG" then
 				local sceid = game.sceid(string.format("%s/__sce_ebootpbp",appman.list[i].path))
 				if sceid and sceid != "---" then
 					if sceid != appman.list[i].id then
