@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<changeinfo>
+<changes app_ver="03.01">
+    <![CDATA[
+- fix updater.<br>
+    ]]>
+</changes>
+<changes app_ver="03.00">
+    <![CDATA[
+- Added uma0: partition support.<br>
+- Hability to move games/apps between  uma0/ur0/ux0 partitions	(The savedata issue still pops up when moving games to ur0).<br>
+- Video export function added (Thanks to The_Flow).<br>
+- USB function removed.<br>
+- Now you can toggle between partitions with L and R in the file explorer.<br>
+- The functions: Install Customthemes,  AppManager Themes and Vpk Scan were moved Advanced section.<br>
+- Added 3 functions in the Options Submenu: Restart APM, Restart OS and Turn off.<br>
+- Reorganization of AppManager Themes, and new lines were added for translations of AppManager+.<br>
+- Whole lot of bugs corrected.<br>
+- Reorganized and cleaned up the code.<br>
+    ]]>
+</changes>
+<changes app_ver="02.20">
+    <![CDATA[
+- Avoids exiting to Livearea by disabling the PS button.<br>
+    ]]>
+</changes>
+<changes app_ver="02.10">
+    <![CDATA[
+- Automatic online update.<br>
+    ]]>
+</changes>
+<changes app_ver="02.00">
+    <![CDATA[
+- USB mode available by pressing START in the File Explorer.<br>
+    ]]>
+</changes>
+<changes app_ver="01.00">
+    <![CDATA[
+- Initial release.<br>
+    ]]>
+</changes>
+</changeinfo>

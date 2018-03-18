@@ -1,6 +1,6 @@
 # AppManagerPlus
 
--![header](Preview.png)
+![header](Preview.png)
 
 An easy to use App Manager for, as the name suggests, manage your PS Vita apps/files and your PSP games.
 
@@ -10,6 +10,52 @@ It comes with built in File Explorer, vpk installer, custom theme installer/remo
 
 As a bonus feature you can design your own theme for AppManagerPlus, with a set of various images and colors and even the font can be changed.
 
+""Special thanks to Wz-jk for graphic design""
+
+![header](versions.png)
+
+## Changelog 3.01 ##
+- Fix Updater (Only...).<br>
+
+## Changelog 3.0 ##
+- Added uma0: partition support.<br>
+- Hability to move games/apps between  uma0/ur0/ux0 partitions	(The savedata issue still pops up when moving games to ur0/uma0).<br>
+- Video export function added (Thanks to The_Flow).<br>
+- USB function removed.<br>
+- Now you can toggle between partitions with L and R in the file explorer.<br>
+- The functions: Install Customthemes,  AppManager Themes and Vpk Scan were moved Advanced section.<br>
+- Added 3 functions in the Options Submenu: Restart APM, Restart OS and Turn off.<br>
+- Reorganization of AppManager Themes, and new lines were added for translations of AppManager+.<br>
+- Whole lot of bugs corrected.<br>
+- Reorganized and cleaned up the code.<br>
+*NOTE: Please delete the folder AppManPlus from path ux0:data/ for the new version.<br>*
+
+## Changelog 2.0 ##
+
+Please update your lang.lua in ux0:/data/AppManPlus/lang.lua
+
+USB mode available by pressing START in the File Explorer.
+
+""Use with caution, do not disconect the ps vita when doing USB data transfer, and  avoid letting the ps vita turn off cause of low battery""
+
+
+FTP mode has been moved to the Options Submenu (pressing triangle on the File Explorer).
+
+Vpk scanning option has been optimized, now, when you enter this option it will do a fast search on the next paths:
+
+"ux0:video/", "ux0:data/", "ux0:data/vpk/", "ux0:/vpk/", "ux0:/vpks/"
+
+"ur0:video/", "ur0:data/", "ur0:data/vpk/", "ur0:/vpk/", "ur0:/vpks/"
+
+If no vpks files are found, it will automatically do a full search on ux0: and ur0:
+
+NOTE: The .mp4 files found will be renamed to .vpk, only if the .mp4 files really are .vpk.
+
+I the case of iso/cso files, the game will be moved to ux0:pspemu/ISO or ur0:pspemu/ISO depending on the iso/cso file origin.
+
+The CustomThemes option now only shows Custom Themes, because the Oficial Themes can not be uninstalled with this app.
+
+The option Install Game for installation of games from folder has been improved (this way you dont need double the space on the memory card).
 
 **#Themes for AppManager**
 
@@ -98,9 +144,10 @@ FTPCOLOR		    = 0xA0CCCCFF
 
 -------------------------------------------------------------------------------------------------------------
 
-The theme folder must be placed in the next path:
 
-ux0:data/AppManager/yournameTheme
+AppManager Plus Themes must be placed in the next path:
+
+ux0:data/AppManPlus/themes/yournameTheme
 
 **Languaje**
 
