@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <changeinfo>
+    <changes app_ver="03.02">
+    <![CDATA[
+- fix for new TLS v1.2.<br>
+- Updated eboot.bin with the new OneLua.<br>
+    ]]>
+</changes>
 <changes app_ver="03.01">
     <![CDATA[
 - fix updater.<br>
